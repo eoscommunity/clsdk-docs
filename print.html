@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_contract/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract_tables/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_contract/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract_tables/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract_notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -372,6 +372,174 @@ cleos push action table buydog '[&quot;bob&quot;, &quot;lambo&quot;, &quot;70.00
 
 # See the purchased animals
 cleos get table table table animal
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="notifications"><a class="header" href="#notifications">Notifications</a></h1>
+<p>This contract adds the following capabilities to the previous examples:</p>
+<ul>
+<li>Receives notifications from <code>eosio.token</code> and tracks user balances</li>
+<li>Deducts from the user balance whenever the user buys a dog</li>
+</ul>
+<p>This example does not cover:</p>
+<ul>
+<li>Removing empty balance records</li>
+<li>Returning excess funds to users</li>
+<li>Protecting against dust attacks on the balance table</li>
+<li>Treating incoming funds from system accounts as special (e.g. unstaking, selling rex, selling ram)</li>
+</ul>
+<p>Place <code>notify.cpp</code> and <code>CMakeLists.txt</code> in an empty folder.</p>
+<h2 id="notifycpp"><a class="header" href="#notifycpp"><code>notify.cpp</code></a></h2>
+<pre><code class="language-cpp">#include &lt;eosio/asset.hpp&gt;
+#include &lt;eosio/eosio.hpp&gt;
+
+namespace example
+{
+   // Keep track of deposited funds
+   struct balance
+   {
+      eosio::name owner;
+      eosio::asset balance;
+
+      uint64_t primary_key() const { return owner.value; }
+   };
+   EOSIO_REFLECT(balance, owner, balance)
+   typedef eosio::multi_index&lt;&quot;balance&quot;_n, balance&gt; balance_table;
+
+   // A purchased animal
+   struct animal
+   {
+      eosio::name name;
+      eosio::name type;
+      eosio::name owner;
+      eosio::asset purchase_price;
+
+      uint64_t primary_key() const { return name.value; }
+   };
+   EOSIO_REFLECT(animal, name, type, owner, purchase_price)
+   typedef eosio::multi_index&lt;&quot;animal&quot;_n, animal&gt; animal_table;
+
+   struct example_contract : public eosio::contract
+   {
+      using eosio::contract::contract;
+
+      // eosio.token transfer notification
+      void notify_transfer(eosio::name from,
+                           eosio::name to,
+                           const eosio::asset&amp; quantity,
+                           std::string memo)
+      {
+         // Only track incoming transfers
+         if (from == get_self())
+            return;
+
+         // The dispatcher has already checked the token contract.
+         // We need to check the token type.
+         eosio::check(quantity.symbol == eosio::symbol{&quot;EOS&quot;, 4},
+                      &quot;This contract does not deal with this token&quot;);
+
+         // Record the change
+         add_balance(from, quantity);
+      }
+
+      // Action: user buys a dog
+      void buydog(eosio::name user, eosio::name dog, const eosio::asset&amp; price)
+      {
+         require_auth(user);
+         eosio::check(price.symbol == eosio::symbol{&quot;EOS&quot;, 4},
+                      &quot;This contract does not deal with this token&quot;);
+         eosio::check(price.amount &gt;= 50'0000, &quot;Dogs cost more than that&quot;);
+         sub_balance(user, price);
+         animal_table table{get_self(), get_self().value};
+         table.emplace(user, [&amp;](auto&amp; record) {
+            record.name = dog;
+            record.type = &quot;dog&quot;_n;
+            record.owner = user;
+            record.purchase_price = price;
+         });
+      }
+
+      // This is not an action; it's a function internal to the contract
+      void add_balance(eosio::name owner, const eosio::asset&amp; quantity)
+      {
+         balance_table table(get_self(), get_self().value);
+         auto record = table.find(owner.value);
+         if (record == table.end())
+            table.emplace(get_self(), [&amp;](auto&amp; a) {
+               a.owner = owner;
+               a.balance = quantity;
+            });
+         else
+            table.modify(record, eosio::same_payer, [&amp;](auto&amp; a) { a.balance += quantity; });
+      }
+
+      // This is not an action; it's a function internal to the contract
+      void sub_balance(eosio::name owner, const eosio::asset&amp; quantity)
+      {
+         balance_table table(get_self(), get_self().value);
+         const auto&amp; record = table.get(owner.value, &quot;user does not have a balance&quot;);
+         eosio::check(record.balance.amount &gt;= quantity.amount, &quot;not enough funds deposited&quot;);
+         table.modify(record, owner, [&amp;](auto&amp; a) { a.balance -= quantity; });
+      }
+   };
+
+   EOSIO_ACTIONS(example_contract,
+                 &quot;example&quot;_n,
+                 notify(&quot;eosio.token&quot;_n, transfer),  // Hook up notification
+                 action(buydog, user, dog, price))
+}  // namespace example
+
+EOSIO_ACTION_DISPATCHER(example::actions)
+
+EOSIO_ABIGEN(actions(example::actions),
+             table(&quot;balance&quot;_n, example::balance),
+             table(&quot;animal&quot;_n, example::animal))
+</code></pre>
+<h2 id="additional-files-1"><a class="header" href="#additional-files-1">Additional files</a></h2>
+<ul>
+<li><a href="contract_notify/CMakeLists.txt">CMakeLists.txt</a></li>
+<li><a href="contract_notify/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href="contract_notify/.vscode/settings.json">.vscode/settings.json</a></li>
+</ul>
+<h2 id="building-2"><a class="header" href="#building-2">Building</a></h2>
+<p>This will create <code>notify.wasm</code> and <code>notify.abi</code>:</p>
+<pre><code class="language-sh">mkdir build
+cd build
+cmake `clsdk-cmake-args` ..
+make -j $(nproc)
+</code></pre>
+<h2 id="trying-the-contract-2"><a class="header" href="#trying-the-contract-2">Trying the contract</a></h2>
+<pre><code># Create some users
+cleos create account eosio alice EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+cleos create account eosio bob EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+
+# Set up eosio.token
+# Note: the build system created a symlink to clsdk for easy access to the token contract
+cleos create account eosio eosio.token EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+cleos set abi eosio.token clsdk/contracts/token.abi
+cleos set code eosio.token clsdk/contracts/token.wasm
+
+cleos push action eosio.token create '[&quot;eosio&quot;, &quot;1000000000.0000 EOS&quot;]' -p eosio.token
+cleos push action eosio.token issue '[&quot;eosio&quot;, &quot;1000000000.0000 EOS&quot;, &quot;&quot;]' -p eosio
+cleos push action eosio.token open '[&quot;alice&quot;, &quot;4,EOS&quot;, &quot;alice&quot;]' -p alice
+cleos push action eosio.token open '[&quot;bob&quot;, &quot;4,EOS&quot;, &quot;bob&quot;]' -p bob
+cleos push action eosio.token transfer '[&quot;eosio&quot;, &quot;alice&quot;, &quot;10000.0000 EOS&quot;, &quot;have some&quot;]' -p eosio
+cleos push action eosio.token transfer '[&quot;eosio&quot;, &quot;bob&quot;, &quot;10000.0000 EOS&quot;, &quot;have some&quot;]' -p eosio
+
+# Install the contract
+cleos create account eosio notify EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+cleos set abi notify notify.abi
+cleos set code notify notify.wasm
+
+# Try out the contract
+cleos push action eosio.token transfer '[&quot;alice&quot;, &quot;notify&quot;, &quot;300.0000 EOS&quot;, &quot;for purchases&quot;]' -p alice
+cleos push action eosio.token transfer '[&quot;bob&quot;, &quot;notify&quot;, &quot;300.0000 EOS&quot;, &quot;for purchases&quot;]' -p bob
+
+cleos push action notify buydog '[&quot;alice&quot;, &quot;fido&quot;, &quot;100.0000 EOS&quot;]' -p alice
+cleos push action notify buydog '[&quot;alice&quot;, &quot;rex&quot;, &quot;120.0000 EOS&quot;]' -p alice
+cleos push action notify buydog '[&quot;bob&quot;, &quot;lambo&quot;, &quot;70.0000 EOS&quot;]' -p bob
+
+# See the remaining balances and the purchased animals
+cleos get table notify notify balance
+cleos get table notify notify animal
 </code></pre>
 
                     </main>
