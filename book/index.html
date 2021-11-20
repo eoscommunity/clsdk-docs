@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tables - clsdk</title>
+        <title>Introduction - clsdk</title>
 
 
         <!-- Custom HTML head -->
@@ -13,21 +13,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="../favicon.svg">
-        <link rel="shortcut icon" href="../favicon.png">
-        <link rel="stylesheet" href="../css/variables.css">
-        <link rel="stylesheet" href="../css/general.css">
-        <link rel="stylesheet" href="../css/chrome.css">
-        <link rel="stylesheet" href="../css/print.css" media="print">
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../fonts/fonts.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -35,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "../";
+            var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_contract/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../contract_tables/index.html" class="active"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../contract_notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../contract_debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -113,7 +113,7 @@
                     <h1 class="menu-title">clsdk</h1>
 
                     <div class="right-buttons">
-                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -142,106 +142,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="tables"><a class="header" href="#tables">Tables</a></h1>
-<p>Here is a contract that uses a table. Place <code>table.cpp</code> and <code>CMakeLists.txt</code> in an empty folder.</p>
-<h2 id="tablecpp"><a class="header" href="#tablecpp"><code>table.cpp</code></a></h2>
-<pre><code class="language-cpp">#include &lt;eosio/asset.hpp&gt;
-#include &lt;eosio/eosio.hpp&gt;
-
-namespace example
-{
-   // A purchased animal
-   struct animal
-   {
-      eosio::name name;             // Name of animal
-      eosio::name type;             // Type of animal
-      eosio::name owner;            // Who owns the animal
-      eosio::asset purchase_price;  // How much the owner paid
-
-      uint64_t primary_key() const { return name.value; }
-   };
-
-   // This does 2 things:
-   // * Controls which fields are stored in the table
-   // * Lets the ABI generator know the field names
-   EOSIO_REFLECT(animal, name, type, owner, purchase_price)
-
-   // Table definition
-   typedef eosio::multi_index&lt;&quot;animal&quot;_n, animal&gt; animal_table;
-
-   struct example_contract : public eosio::contract
-   {
-      using eosio::contract::contract;
-
-      // Action: user buys a dog
-      void buydog(eosio::name user, eosio::name dog, const eosio::asset&amp; price)
-      {
-         require_auth(user);
-         animal_table table{get_self(), get_self().value};
-         table.emplace(user, [&amp;](auto&amp; record) {
-            record.name = dog;
-            record.type = &quot;dog&quot;_n;
-            record.owner = user;
-            record.purchase_price = price;
-         });
-      }
-   };
-
-   EOSIO_ACTIONS(example_contract,  //
-                 &quot;example&quot;_n,       //
-                 action(buydog, user, dog, price))
-}  // namespace example
-
-EOSIO_ACTION_DISPATCHER(example::actions)
-
-EOSIO_ABIGEN(
-    // Include the contract actions in the ABI
-    actions(example::actions),
-
-    // Include the table in the ABI
-    table(&quot;animal&quot;_n, example::animal))
-</code></pre>
-<h2 id="additional-files"><a class="header" href="#additional-files">Additional files</a></h2>
-<ul>
-<li><a href="CMakeLists.txt">CMakeLists.txt</a></li>
-<li><a href=".vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
-<li><a href=".vscode/settings.json">.vscode/settings.json</a></li>
-</ul>
-<h2 id="building"><a class="header" href="#building">Building</a></h2>
-<p>This will create <code>table.wasm</code> and <code>table.abi</code>:</p>
-<pre><code class="language-sh">mkdir build
-cd build
-cmake `clsdk-cmake-args` ..
-make -j $(nproc)
-</code></pre>
-<h2 id="trying-the-contract"><a class="header" href="#trying-the-contract">Trying the contract</a></h2>
-<pre><code># Create some users
-cleos create account eosio alice EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-cleos create account eosio bob EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-
-# Install the contract
-cleos create account eosio table EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-cleos set abi table table.abi
-cleos set code table table.wasm
-
-# Try out the contract
-cleos push action table buydog '[&quot;alice&quot;, &quot;fido&quot;, &quot;100.0000 EOS&quot;]' -p alice
-cleos push action table buydog '[&quot;alice&quot;, &quot;rex&quot;, &quot;120.0000 EOS&quot;]' -p alice
-cleos push action table buydog '[&quot;bob&quot;, &quot;lambo&quot;, &quot;70.0000 EOS&quot;]' -p bob
-
-# See the purchased animals
-cleos get table table table animal
-</code></pre>
+                        <p>...</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../basic_contract/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
 
-                            <a rel="next" href="../contract_notify/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="ubuntu.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -251,11 +159,8 @@ cleos get table table table animal
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../basic_contract/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
 
-                    <a rel="next" href="../contract_notify/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="ubuntu.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -270,13 +175,13 @@ cleos get table table table animal
         </script>
 
 
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
 

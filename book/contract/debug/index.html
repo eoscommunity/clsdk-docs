@@ -13,21 +13,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="../favicon.svg">
-        <link rel="shortcut icon" href="../favicon.png">
-        <link rel="stylesheet" href="../css/variables.css">
-        <link rel="stylesheet" href="../css/general.css">
-        <link rel="stylesheet" href="../css/chrome.css">
-        <link rel="stylesheet" href="../css/print.css" media="print">
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../fonts/fonts.css">
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -35,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "../";
+            var path_to_root = "../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basic_contract/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../contract_tables/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../contract_notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../contract_debug/index.html" class="active"><strong aria-hidden="true">3.4.</strong> Debugging</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html" class="active"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -113,7 +113,7 @@
                     <h1 class="menu-title">clsdk</h1>
 
                     <div class="right-buttons">
-                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -143,7 +143,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="debugging"><a class="header" href="#debugging">Debugging</a></h1>
-<p>This contract is identical to the one in <a href="../contract_notify/index.html">Notifications</a>, except it extends <code>CMakeLists.txt</code> to build <code>notify-debug.wasm</code> and it has an additional config file (<code>launch.json</code>).</p>
+<p>This contract is identical to the one in <a href="../notify/index.html">Notifications</a>, except it extends <code>CMakeLists.txt</code> to build <code>notify-debug.wasm</code> and it has an additional config file (<code>launch.json</code>).</p>
 <h2 id="cmakeliststxt"><a class="header" href="#cmakeliststxt"><code>CMakeLists.txt</code></a></h2>
 <pre><code class="language-cpp"># All cmake projects need these
 cmake_minimum_required(VERSION 3.16)
@@ -206,101 +206,18 @@ make -j $(nproc)
 <p>Only substituted wasms get the relaxed limits and debug info support.</p>
 <p>Caution: debug_plugin intentionally breaks consensus rules to function; nodes using it may fork away from production chains.</p>
 <p>Caution: stopping nodeos from inside the debugger will corrupt its database.</p>
-<h2 id="debugging-using-vscode"><a class="header" href="#debugging-using-vscode">Debugging using vscode</a></h2>
-<p>You should have the following project tree:</p>
-<pre><code>&lt;project root&gt;/   &lt;==== open this directory in vscode
-   .vscode/
-      c_cpp_properties.json
-      launch.json
-      settings.json
-   CMakeLists.txt
-   notify.cpp
-   build/         (Created by build step above)
-      clsdk -&gt; ....
-      notify-debug.wasm
-      notify.abi
-      notify.wasm
-      wasi-sdk -&gt; ....
-</code></pre>
-<p><code>launch.json</code> sets the following nodeos options. Adjust them to your needs:</p>
-<pre><code>-d data --config-dir config
---plugin eosio::chain_api_plugin
---plugin eosio::producer_api_plugin
---plugin eosio::debug_plugin
---subst clsdk/contracts/token.wasm:clsdk/contracts/token-debug.wasm
---subst notify.wasm:notify-debug.wasm
--e -p eosio
-</code></pre>
-<p>Open <code>notify.cpp</code> and set some break points. You may also add break points to <code>build/clsdk/contracts/token/src/token.cpp</code>.</p>
-<p>Start the debugger. nodeos will start running. To see its log, switch to the &quot;cppdbg: nodeos&quot; terminal.</p>
-<p>From another terminal, use these commands to install and exercise the contracts. The debugger should hit the breakpoints you set in the contracts and pause.</p>
-<pre><code>cd build
-
-# Create some users
-cleos create account eosio alice EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-cleos create account eosio bob EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-
-# Set up eosio.token
-# Note: the build system created a symlink to clsdk for easy access to the token contract
-cleos create account eosio eosio.token EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-cleos set abi eosio.token clsdk/contracts/token.abi
-cleos set code eosio.token clsdk/contracts/token.wasm
-
-cleos push action eosio.token create '[&quot;eosio&quot;, &quot;1000000000.0000 EOS&quot;]' -p eosio.token
-cleos push action eosio.token issue '[&quot;eosio&quot;, &quot;1000000000.0000 EOS&quot;, &quot;&quot;]' -p eosio
-cleos push action eosio.token open '[&quot;alice&quot;, &quot;4,EOS&quot;, &quot;alice&quot;]' -p alice
-cleos push action eosio.token open '[&quot;bob&quot;, &quot;4,EOS&quot;, &quot;bob&quot;]' -p bob
-cleos push action eosio.token transfer '[&quot;eosio&quot;, &quot;alice&quot;, &quot;10000.0000 EOS&quot;, &quot;have some&quot;]' -p eosio
-cleos push action eosio.token transfer '[&quot;eosio&quot;, &quot;bob&quot;, &quot;10000.0000 EOS&quot;, &quot;have some&quot;]' -p eosio
-
-# Install the notify contract
-cleos create account eosio notify EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-cleos set abi notify notify.abi
-cleos set code notify notify.wasm
-
-# Try out the notify contract
-cleos push action eosio.token transfer '[&quot;alice&quot;, &quot;notify&quot;, &quot;300.0000 EOS&quot;, &quot;for purchases&quot;]' -p alice
-cleos push action eosio.token transfer '[&quot;bob&quot;, &quot;notify&quot;, &quot;300.0000 EOS&quot;, &quot;for purchases&quot;]' -p bob
-
-cleos push action notify buydog '[&quot;alice&quot;, &quot;fido&quot;, &quot;100.0000 EOS&quot;]' -p alice
-cleos push action notify buydog '[&quot;alice&quot;, &quot;rex&quot;, &quot;120.0000 EOS&quot;]' -p alice
-cleos push action notify buydog '[&quot;bob&quot;, &quot;lambo&quot;, &quot;70.0000 EOS&quot;]' -p bob
-
-# See the remaining balances and the purchased animals
-cleos get table notify notify balance
-cleos get table notify notify animal
-</code></pre>
-<h2 id="debugging-functionality"><a class="header" href="#debugging-functionality">Debugging functionality</a></h2>
-<p>The following are available:</p>
-<ul>
-<li>breakpoints</li>
-<li>step in</li>
-<li>step out</li>
-<li>step over</li>
-<li>continue</li>
-<li>call stack</li>
-</ul>
-<p>The following are not available</p>
-<ul>
-<li>examining variables</li>
-<li>examining memory</li>
-</ul>
-<h2 id="corrupted-database-recovery"><a class="header" href="#corrupted-database-recovery">Corrupted database recovery</a></h2>
-<p>The debugger can cause nodeos to corrupt its database. There are 2 options to recover from the corruption:</p>
-<ul>
-<li>Wipe the database and start over: from the <code>build</code> directory, run <code>rm -rf data</code></li>
-<li>Force a replay. Note that this can trigger breakpoints (helpful for reproductions). From the <code>build</code> directory, run <code>rm -rf data/state data/blocks/reversible</code>. Alternatively, add <code>--hard-replay-blockchain</code> to the nodeos options in <code>launch.json</code>.</li>
-</ul>
-<p>You can start nodeos again in the debugger after doing one of the above.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../contract_notify/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../contract/notify/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next" href="../../contract/debug/vscode.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -308,10 +225,13 @@ cleos get table notify notify animal
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../contract_notify/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../contract/notify/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next" href="../../contract/debug/vscode.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
@@ -324,13 +244,13 @@ cleos get table notify notify animal
         </script>
 
 
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
 

@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="basic_contract/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract_tables/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract_notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract_debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -279,8 +279,8 @@ cleos push action example buydog '[&quot;eosio&quot;, &quot;fido&quot;, &quot;10
 <h2 id="vscode-support"><a class="header" href="#vscode-support">vscode support</a></h2>
 <p>The following files configure vscode:</p>
 <ul>
-<li><a href="basic_contract/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
-<li><a href="basic_contract/.vscode/settings.json">.vscode/settings.json</a></li>
+<li><a href="contract/basic/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href="contract/basic/.vscode/settings.json">.vscode/settings.json</a></li>
 </ul>
 <p>Code completion and symbol lookup does not work until the project is built (above).</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tables"><a class="header" href="#tables">Tables</a></h1>
@@ -344,9 +344,9 @@ EOSIO_ABIGEN(
 </code></pre>
 <h2 id="additional-files"><a class="header" href="#additional-files">Additional files</a></h2>
 <ul>
-<li><a href="contract_tables/CMakeLists.txt">CMakeLists.txt</a></li>
-<li><a href="contract_tables/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
-<li><a href="contract_tables/.vscode/settings.json">.vscode/settings.json</a></li>
+<li><a href="contract/table/CMakeLists.txt">CMakeLists.txt</a></li>
+<li><a href="contract/table/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href="contract/table/.vscode/settings.json">.vscode/settings.json</a></li>
 </ul>
 <h2 id="building-1"><a class="header" href="#building-1">Building</a></h2>
 <p>This will create <code>table.wasm</code> and <code>table.abi</code>:</p>
@@ -495,9 +495,9 @@ EOSIO_ABIGEN(actions(example::actions),
 </code></pre>
 <h2 id="additional-files-1"><a class="header" href="#additional-files-1">Additional files</a></h2>
 <ul>
-<li><a href="contract_notify/CMakeLists.txt">CMakeLists.txt</a></li>
-<li><a href="contract_notify/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
-<li><a href="contract_notify/.vscode/settings.json">.vscode/settings.json</a></li>
+<li><a href="contract/notify/CMakeLists.txt">CMakeLists.txt</a></li>
+<li><a href="contract/notify/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href="contract/notify/.vscode/settings.json">.vscode/settings.json</a></li>
 </ul>
 <h2 id="building-2"><a class="header" href="#building-2">Building</a></h2>
 <p>This will create <code>notify.wasm</code> and <code>notify.abi</code>:</p>
@@ -542,7 +542,7 @@ cleos get table notify notify balance
 cleos get table notify notify animal
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="debugging"><a class="header" href="#debugging">Debugging</a></h1>
-<p>This contract is identical to the one in <a href="contract_debug/../contract_notify/index.html">Notifications</a>, except it extends <code>CMakeLists.txt</code> to build <code>notify-debug.wasm</code> and it has an additional config file (<code>launch.json</code>).</p>
+<p>This contract is identical to the one in <a href="contract/debug/../notify/index.html">Notifications</a>, except it extends <code>CMakeLists.txt</code> to build <code>notify-debug.wasm</code> and it has an additional config file (<code>launch.json</code>).</p>
 <h2 id="cmakeliststxt-1"><a class="header" href="#cmakeliststxt-1"><code>CMakeLists.txt</code></a></h2>
 <pre><code class="language-cpp"># All cmake projects need these
 cmake_minimum_required(VERSION 3.16)
@@ -583,10 +583,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 </code></pre>
 <h2 id="additional-files-2"><a class="header" href="#additional-files-2">Additional files</a></h2>
 <ul>
-<li><a href="contract_debug/notify.cpp">notify.cpp</a></li>
-<li><a href="contract_debug/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
-<li><a href="contract_debug/.vscode/settings.json">.vscode/settings.json</a></li>
-<li><a href="contract_debug/.vscode/launch.json">.vscode/launch.json</a></li>
+<li><a href="contract/debug/notify.cpp">notify.cpp</a></li>
+<li><a href="contract/debug/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href="contract/debug/.vscode/settings.json">.vscode/settings.json</a></li>
+<li><a href="contract/debug/.vscode/launch.json">.vscode/launch.json</a></li>
 </ul>
 <h2 id="building-3"><a class="header" href="#building-3">Building</a></h2>
 <p>This will create <code>notify.wasm</code>, <code>notify-debug.wasm</code>, and <code>notify.abi</code>:</p>
@@ -605,7 +605,7 @@ make -j $(nproc)
 <p>Only substituted wasms get the relaxed limits and debug info support.</p>
 <p>Caution: debug_plugin intentionally breaks consensus rules to function; nodes using it may fork away from production chains.</p>
 <p>Caution: stopping nodeos from inside the debugger will corrupt its database.</p>
-<h2 id="debugging-using-vscode"><a class="header" href="#debugging-using-vscode">Debugging using vscode</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="debugging-using-vscode"><a class="header" href="#debugging-using-vscode">Debugging using vscode</a></h1>
 <p>You should have the following project tree:</p>
 <pre><code>&lt;project root&gt;/   &lt;==== open this directory in vscode
    .vscode/
@@ -688,7 +688,100 @@ cleos get table notify notify animal
 <p>The debugger can cause nodeos to corrupt its database. There are 2 options to recover from the corruption:</p>
 <ul>
 <li>Wipe the database and start over: from the <code>build</code> directory, run <code>rm -rf data</code></li>
-<li>Force a replay. Note that this can trigger breakpoints (helpful for reproductions). From the <code>build</code> directory, run <code>rm -rf data/state data/blocks/reversible</code>. Alternatively, add <code>--hard-replay-blockchain</code> to the nodeos options in <code>launch.json</code>.</li>
+<li>Force a replay. This can trigger breakpoints (helpful for reproductions). From the <code>build</code> directory, run <code>rm -rf data/state data/blocks/reversible</code>. Alternatively, add <code>--hard-replay-blockchain</code> to the nodeos options in <code>launch.json</code>.</li>
+</ul>
+<p>You can start nodeos again in the debugger after doing one of the above.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="debugging-using-gdb-command-line"><a class="header" href="#debugging-using-gdb-command-line">Debugging using gdb command line</a></h1>
+<p>You should have the following project tree:</p>
+<pre><code>&lt;project root&gt;/
+   CMakeLists.txt
+   notify.cpp
+   build/         (Created by build step above)
+      clsdk -&gt; ....
+      notify-debug.wasm
+      notify.abi
+      notify.wasm
+      wasi-sdk -&gt; ....
+</code></pre>
+<p>To start a debug session on the command line:</p>
+<pre><code>cd build
+gdb -q --args                                                           \
+   ./clsdk/bin/nodeos                                                   \
+   -d data --config-dir config                                          \
+   --plugin eosio::chain_api_plugin                                     \
+   --plugin eosio::producer_api_plugin                                  \
+   --plugin eosio::debug_plugin                                         \
+   --subst clsdk/contracts/token.wasm:clsdk/contracts/token-debug.wasm  \
+   --subst notify.wasm:notify-debug.wasm                                \
+   -e -p eosio
+</code></pre>
+<p>Ignore <code>No debugging symbols found in ...</code>; it will load debugging symbols for the wasm files instead.</p>
+<p>The following gdb commands set options gdb needs to function, set some breakpoints, and start nodeos.</p>
+<pre><code>handle SIG34 noprint
+set breakpoint pending on
+set substitute-path clsdk-wasi-sdk: wasi-sdk
+set substitute-path clsdk: clsdk
+b example_contract::notify_transfer
+b example_contract::buydog
+run
+</code></pre>
+<p>From another terminal, use these commands to install and exercise the contracts. The debugger should hit the breakpoints you set in the contracts and pause.</p>
+<pre><code>cd build
+
+# Create some users
+cleos create account eosio alice EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+cleos create account eosio bob EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+
+# Set up eosio.token
+# Note: the build system created a symlink to clsdk for easy access to the token contract
+cleos create account eosio eosio.token EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+cleos set abi eosio.token clsdk/contracts/token.abi
+cleos set code eosio.token clsdk/contracts/token.wasm
+
+cleos push action eosio.token create '[&quot;eosio&quot;, &quot;1000000000.0000 EOS&quot;]' -p eosio.token
+cleos push action eosio.token issue '[&quot;eosio&quot;, &quot;1000000000.0000 EOS&quot;, &quot;&quot;]' -p eosio
+cleos push action eosio.token open '[&quot;alice&quot;, &quot;4,EOS&quot;, &quot;alice&quot;]' -p alice
+cleos push action eosio.token open '[&quot;bob&quot;, &quot;4,EOS&quot;, &quot;bob&quot;]' -p bob
+cleos push action eosio.token transfer '[&quot;eosio&quot;, &quot;alice&quot;, &quot;10000.0000 EOS&quot;, &quot;have some&quot;]' -p eosio
+cleos push action eosio.token transfer '[&quot;eosio&quot;, &quot;bob&quot;, &quot;10000.0000 EOS&quot;, &quot;have some&quot;]' -p eosio
+
+# Install the notify contract
+cleos create account eosio notify EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
+cleos set abi notify notify.abi
+cleos set code notify notify.wasm
+
+# Try out the notify contract; these should trigger breakpoints
+cleos push action eosio.token transfer '[&quot;alice&quot;, &quot;notify&quot;, &quot;300.0000 EOS&quot;, &quot;for purchases&quot;]' -p alice
+cleos push action eosio.token transfer '[&quot;bob&quot;, &quot;notify&quot;, &quot;300.0000 EOS&quot;, &quot;for purchases&quot;]' -p bob
+
+cleos push action notify buydog '[&quot;alice&quot;, &quot;fido&quot;, &quot;100.0000 EOS&quot;]' -p alice
+cleos push action notify buydog '[&quot;alice&quot;, &quot;rex&quot;, &quot;120.0000 EOS&quot;]' -p alice
+cleos push action notify buydog '[&quot;bob&quot;, &quot;lambo&quot;, &quot;70.0000 EOS&quot;]' -p bob
+
+# See the remaining balances and the purchased animals
+cleos get table notify notify balance
+cleos get table notify notify animal
+</code></pre>
+<h2 id="debugging-functionality-1"><a class="header" href="#debugging-functionality-1">Debugging functionality</a></h2>
+<p>The following functionality is supported:</p>
+<ul>
+<li>breakpoints (<code>b</code>)</li>
+<li>step in (<code>s</code>)</li>
+<li>step out (<code>fin</code>)</li>
+<li>step over (<code>n</code>)</li>
+<li>continue (<code>c</code>)</li>
+<li>call stack (<code>bt</code>)</li>
+</ul>
+<p>The following are not available:</p>
+<ul>
+<li>examining variables</li>
+<li>examining memory</li>
+</ul>
+<h2 id="corrupted-database-recovery-1"><a class="header" href="#corrupted-database-recovery-1">Corrupted database recovery</a></h2>
+<p>The debugger can cause nodeos to corrupt its database. There are 2 options to recover from the corruption:</p>
+<ul>
+<li>Wipe the database and start over: from the <code>build</code> directory, run <code>rm -rf data</code></li>
+<li>Force a replay. This can trigger breakpoints (helpful for reproductions). From the <code>build</code> directory, run <code>rm -rf data/state data/blocks/reversible</code>. Alternatively, add <code>--hard-replay-blockchain</code> to the nodeos options.</li>
 </ul>
 <p>You can start nodeos again in the debugger after doing one of the above.</p>
 
