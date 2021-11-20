@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Basic Contract - clsdk</title>
+        <title>Getting Started - clsdk</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html" class="active"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html" class="active"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,124 +142,83 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="basic-contract"><a class="header" href="#basic-contract">Basic Contract</a></h1>
-<p>Here is a basic contract definition. Place <code>example.cpp</code> and <code>CMakeLists.txt</code> in an empty folder.</p>
-<h2 id="examplecpp"><a class="header" href="#examplecpp"><code>example.cpp</code></a></h2>
-<pre><code class="language-cpp">#include &lt;eosio/asset.hpp&gt;
-#include &lt;eosio/eosio.hpp&gt;
+                        <h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<h2 id="contract-modifications"><a class="header" href="#contract-modifications">Contract modifications</a></h2>
+<p>To simplify testing, the contract's class definition and table definitions should be in a header file.</p>
+<p>This example is based on the <a href="../../contract/debug/index.html">Debug Example</a>, but has these additions:</p>
+<ul>
+<li>The contract source is now split into <code>testable.hpp</code> and <code>testable.cpp</code></li>
+<li>CMakeLists.txt has a new rule to build <code>tests.wasm</code> from <code>tests.cpp</code> (below)</li>
+<li><code>launch.json</code> now launches the test cases in cltester instead of starting nodeos</li>
+</ul>
+<p>The files:</p>
+<ul>
+<li><a href="testable.hpp">testable.hpp</a></li>
+<li><a href="testable.cpp">testable.cpp</a></li>
+<li><a href="CMakeLists.txt">CMakeLists.txt</a></li>
+<li><a href=".vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href=".vscode/settings.json">.vscode/settings.json</a></li>
+<li><a href=".vscode/launch.json">.vscode/launch.json</a></li>
+</ul>
+<h2 id="simple-test-case"><a class="header" href="#simple-test-case">Simple test case</a></h2>
+<p><code>tests.cpp</code>:</p>
+<pre><code class="language-cpp">// cltester definitions
+#include &lt;eosio/tester.hpp&gt;
 
-// The contract class must be in a namespace
-namespace example
+// contract definitions
+#include &quot;testable.hpp&quot;
+
+// Catch2 unit testing framework. https://github.com/catchorg/Catch2
+#define CATCH_CONFIG_MAIN
+#include &lt;catch2/catch.hpp&gt;
+
+using namespace eosio;
+
+TEST_CASE(&quot;No tokens&quot;)
 {
-   // The contract
-   struct example_contract : public eosio::contract
-   {
-      // Use the base class constructors
-      using eosio::contract::contract;
+   // This starts a blockchain. This is similar to running nodeos, but forces
+   // creation of a new blockchain and offers more control.
+   test_chain chain;
 
-      // Action: user buys a dog
-      void buydog(eosio::name user, eosio::name dog, const eosio::asset&amp; price)
-      {
-         // TODO: buy a dog
-      }
-   };
+   // Install the testable contract. Some notes:
+   // * create_code_account is like create_account (used below), except it adds
+   //   eosio.code to the active authority.
+   // * cltester doesn't need the ABI to operate, so we don't need to set it.
+   chain.create_code_account(&quot;example&quot;_n);
+   chain.set_code(&quot;example&quot;_n, &quot;testable.wasm&quot;);
 
-   // First part of the dispatcher
-   EOSIO_ACTIONS(example_contract,  //
-                 &quot;example&quot;_n,       //
-                 action(buydog, user, dog, price))
-}  // namespace example
+   // Create a user account
+   chain.create_account(&quot;alice&quot;_n);
 
-// Final part of the dispatcher
-EOSIO_ACTION_DISPATCHER(example::actions)
-
-// ABI generation
-EOSIO_ABIGEN(actions(example::actions))
+   // Alice tries to buy a dog, but has no tokens
+   // This verifies the appropriate error is produced
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;0.0000 EOS&quot;)),
+          &quot;Dogs cost more than that&quot;);
+}
 </code></pre>
-<h2 id="cmakeliststxt"><a class="header" href="#cmakeliststxt"><code>CMakeLists.txt</code></a></h2>
-<pre><code># All cmake projects need these
-cmake_minimum_required(VERSION 3.16)
-project(example)
-
-# clsdk requires C++20
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Libraries for building contracts and tests
-find_package(clsdk REQUIRED)
-
-# Build example.wasm contract
-add_executable(example example.cpp)
-target_link_libraries(example eosio-contract-simple-malloc)
-
-# Generate example.abi
-# This is a 2-step process:
-#   * Build example.abi.wasm. This must link to eosio-contract-abigen.
-#   * Run the wasm to generate the abi
-add_executable(example-abigen example.cpp)
-target_link_libraries(example-abigen eosio-contract-abigen)
-add_custom_command(TARGET example-abigen POST_BUILD
-    COMMAND cltester example-abigen.wasm &gt;example.abi
-)
-
-# These symlinks help vscode
-execute_process(COMMAND ln -sf ${clsdk_DIR} ${CMAKE_CURRENT_BINARY_DIR}/clsdk)
-execute_process(COMMAND ln -sf ${WASI_SDK_PREFIX} ${CMAKE_CURRENT_BINARY_DIR}/wasi-sdk)
-
-# Generate compile_commands.json to aid vscode and other editors
-set(CMAKE_EXPORT_COMPILE_COMMANDS on)
-</code></pre>
-<h2 id="building"><a class="header" href="#building">Building</a></h2>
-<p>This will create <code>example.wasm</code> and <code>example.abi</code>:</p>
-<pre><code class="language-sh">mkdir build
+<h2 id="running-the-test"><a class="header" href="#running-the-test">Running the test</a></h2>
+<p>This builds the contract and the test:</p>
+<pre><code>mkdir build
 cd build
 cmake `clsdk-cmake-args` ..
 make -j $(nproc)
 </code></pre>
-<h2 id="trying-the-contract"><a class="header" href="#trying-the-contract">Trying the contract</a></h2>
-<p>clsdk comes with nodeos, cleos, and keosd. The following will execute the contract:</p>
-<pre><code># Start keosd on an empty directory
-killall keosd
-rm -rf testing-wallet testing-wallet-password
-mkdir testing-wallet
-keosd --wallet-dir `pwd`/testing-wallet --unlock-timeout 99999999 &gt;keosd.log 2&gt;&amp;1 &amp;
-
-# Create a default wallet. This saves the password in testing-wallet-password
-cleos wallet create -f testing-wallet-password
-
-# Add the default development key
-cleos wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
-
-# Start up a fresh chain
-killall nodeos
-rm -rf data config
-nodeos -d data --config-dir config --plugin eosio::chain_api_plugin --plugin eosio::producer_api_plugin -e -p eosio &gt;nodeos.log 2&gt;&amp;1 &amp;
-
-# Install the contract
-cleos create account eosio example EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-cleos set abi example example.abi
-cleos set code example example.wasm
-
-# Try out the contract (does nothing)
-cleos push action example buydog '[&quot;eosio&quot;, &quot;fido&quot;, &quot;100.0000 EOS&quot;]' -p eosio
+<p>Use one of these to run the test:</p>
+<pre><code class="language-sh">cltester tests.wasm        # minimal logging
+cltester -v tests.wasm     # show blockchain logging. This also
+                           # shows any contract prints in green.
 </code></pre>
-<h2 id="vscode-support"><a class="header" href="#vscode-support">vscode support</a></h2>
-<p>The following files configure vscode:</p>
-<ul>
-<li><a href=".vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
-<li><a href=".vscode/settings.json">.vscode/settings.json</a></li>
-</ul>
-<p>Code completion and symbol lookup does not work until the project is built (above).</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../ubuntu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../contract/debug/gdb.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../../contract/table/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../cltester/starting/vscode.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -269,11 +228,11 @@ cleos push action example buydog '[&quot;eosio&quot;, &quot;fido&quot;, &quot;10
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../ubuntu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../contract/debug/gdb.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../../contract/table/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../../cltester/starting/vscode.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
