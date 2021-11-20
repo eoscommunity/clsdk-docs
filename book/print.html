@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -909,6 +909,140 @@ set substitute-path clsdk: clsdk
 b example_contract::notify_transfer
 b example_contract::buydog
 run
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="token-support"><a class="header" href="#token-support">Token Support</a></h1>
+<p>Our test cases need to interact with the token contract in order to fully test our example. clsdk comes with a cltester-ready version of the token contract.</p>
+<p>Example files:</p>
+<ul>
+<li><a href="cltester/token/testable.hpp">testable.hpp</a></li>
+<li><a href="cltester/token/testable.cpp">testable.cpp</a></li>
+<li><a href="cltester/token/tests.cpp">tests.cpp</a></li>
+<li><a href="cltester/token/CMakeLists.txt">CMakeLists.txt</a></li>
+<li><a href="cltester/token/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href="cltester/token/.vscode/settings.json">.vscode/settings.json</a></li>
+<li><a href="cltester/token/.vscode/launch.json">.vscode/launch.json</a></li>
+</ul>
+<h2 id="test-cases"><a class="header" href="#test-cases">Test cases</a></h2>
+<p>This demonstrates the following:</p>
+<ul>
+<li>Interacting with the token contract in tests</li>
+<li>Running multiple tests using multiple chains</li>
+<li>Creating helper functions to reduce repetition in tests</li>
+</ul>
+<p><code>tests.cpp</code>:</p>
+<pre><code class="language-cpp">#include &lt;eosio/tester.hpp&gt;
+#include &lt;token/token.hpp&gt;  // comes bundled with clsdk
+#include &quot;testable.hpp&quot;
+
+#define CATCH_CONFIG_MAIN
+#include &lt;catch2/catch.hpp&gt;
+
+using namespace eosio;
+
+// Set up the token contract
+void setup_token(test_chain&amp; t)
+{
+   t.create_code_account(&quot;eosio.token&quot;_n);
+   t.set_code(&quot;eosio.token&quot;_n, CLSDK_CONTRACTS_DIR &quot;token.wasm&quot;);
+
+   // Create and issue tokens.
+   t.as(&quot;eosio.token&quot;_n).act&lt;token::actions::create&gt;(&quot;eosio&quot;_n, s2a(&quot;1000000.0000 EOS&quot;));
+   t.as(&quot;eosio.token&quot;_n).act&lt;token::actions::create&gt;(&quot;eosio&quot;_n, s2a(&quot;1000000.0000 OTHER&quot;));
+   t.as(&quot;eosio&quot;_n).act&lt;token::actions::issue&gt;(&quot;eosio&quot;_n, s2a(&quot;1000000.0000 EOS&quot;), &quot;&quot;);
+   t.as(&quot;eosio&quot;_n).act&lt;token::actions::issue&gt;(&quot;eosio&quot;_n, s2a(&quot;1000000.0000 OTHER&quot;), &quot;&quot;);
+}
+
+// Create and fund user accounts
+void fund_users(test_chain&amp; t)
+{
+   for (auto user : {&quot;alice&quot;_n, &quot;bob&quot;_n, &quot;jane&quot;_n, &quot;joe&quot;_n})
+   {
+      t.create_account(user);
+      t.as(&quot;eosio&quot;_n).act&lt;token::actions::transfer&gt;(&quot;eosio&quot;_n, user, s2a(&quot;10000.0000 EOS&quot;), &quot;&quot;);
+      t.as(&quot;eosio&quot;_n).act&lt;token::actions::transfer&gt;(&quot;eosio&quot;_n, user, s2a(&quot;10000.0000 OTHER&quot;), &quot;&quot;);
+   }
+}
+
+// Set up the example contract
+void setup_example(test_chain&amp; t)
+{
+   t.create_code_account(&quot;example&quot;_n);
+   t.set_code(&quot;example&quot;_n, &quot;testable.wasm&quot;);
+}
+
+// Full setup for test chain
+void setup(test_chain&amp; t)
+{
+   setup_token(t);
+   fund_users(t);
+   setup_example(t);
+}
+
+TEST_CASE(&quot;Alice Attacks&quot;)
+{
+   // This is the first blockchain
+   test_chain chain;
+   setup(chain);
+
+   // Alice tries to get a dog for free
+   // This verifies the appropriate error is produced
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;0.0000 EOS&quot;)),
+          &quot;Dogs cost more than that&quot;);
+
+   // Alice tries to buy a dog, but hasn't transferred any tokens to the contract
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
+          &quot;user does not have a balance&quot;);
+
+   // Alice tries to transfer an unsupported token to the contract
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;token::actions::transfer&gt;(  //
+              &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;100.0000 OTHER&quot;), &quot;&quot;),
+          &quot;This contract does not deal with this token&quot;);
+
+   // Alice transfers the correct token
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(  //
+       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+
+   // Alice tries to get sneaky with the wrong token
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 OTHER&quot;)),
+          &quot;This contract does not deal with this token&quot;);
+}
+
+TEST_CASE(&quot;No duplicate dog names&quot;)
+{
+   // This is a different blockchain than used from the previous test
+   test_chain chain;
+   setup(chain);
+
+   // Alice goes first
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(  //
+       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(  //
+       &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(  //
+       &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
+
+   // Bob is next
+   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(  //
+       &quot;bob&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(  //
+       &quot;bob&quot;_n, &quot;wolf&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+
+   // Sorry, Bob
+   expect(chain.as(&quot;bob&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;bob&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
+          &quot;could not insert object, most likely a uniqueness constraint was violated&quot;);
+}
+</code></pre>
+<h2 id="running-the-test-1"><a class="header" href="#running-the-test-1">Running the test</a></h2>
+<p>This builds the contract, builds the tests, and runs the tests:</p>
+<pre><code>mkdir build
+cd build
+cmake `clsdk-cmake-args` ..
+make -j $(nproc)
+cltester -v tests.wasm
 </code></pre>
 
                     </main>
