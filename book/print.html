@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -784,7 +784,7 @@ cleos get table notify notify animal
 <li>Force a replay. This can trigger breakpoints (helpful for reproductions). From the <code>build</code> directory, run <code>rm -rf data/state data/blocks/reversible</code>. Alternatively, add <code>--hard-replay-blockchain</code> to the nodeos options.</li>
 </ul>
 <p>You can start nodeos again in the debugger after doing one of the above.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-getting-started"><a class="header" href="#cltester-getting-started">cltester: Getting Started</a></h1>
 <h2 id="contract-modifications"><a class="header" href="#contract-modifications">Contract modifications</a></h2>
 <p>To simplify testing, the contract's class definition and table definitions should be in a header file.</p>
 <p>This example is based on the <a href="cltester/starting/../../contract/debug/index.html">Debug Example</a>, but has these additions:</p>
@@ -851,7 +851,7 @@ make -j $(nproc)
 cltester -v tests.wasm     # show blockchain logging. This also
                            # shows any contract prints in green.
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="debugging-using-vscode-1"><a class="header" href="#debugging-using-vscode-1">Debugging using vscode</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-debugging-using-vscode"><a class="header" href="#cltester-debugging-using-vscode">cltester: Debugging using vscode</a></h1>
 <p>You should have the following project tree:</p>
 <pre><code>&lt;project root&gt;/   &lt;==== open this directory in vscode
    .vscode/
@@ -877,7 +877,7 @@ tests.wasm
 </code></pre>
 <p>Open <code>testable.cpp</code> and set some break points. You may also add break points to <code>tests</code>.</p>
 <p>Start the debugger. cltester will start running. To see its log, switch to the &quot;cppdbg: cltester&quot; terminal. vscode should stop at one of your breakpoints.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="debugging-using-gdb-command-line-1"><a class="header" href="#debugging-using-gdb-command-line-1">Debugging using gdb command line</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-debugging-using-gdb-command-line"><a class="header" href="#cltester-debugging-using-gdb-command-line">cltester: Debugging using gdb command line</a></h1>
 <p>You should have the following project tree:</p>
 <pre><code>&lt;project root&gt;/
    CMakeLists.txt
@@ -910,7 +910,7 @@ b example_contract::notify_transfer
 b example_contract::buydog
 run
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="token-support"><a class="header" href="#token-support">Token Support</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-token-support"><a class="header" href="#cltester-token-support">cltester: Token Support</a></h1>
 <p>Our test cases need to interact with the token contract in order to fully test our example. clsdk comes with a cltester-ready version of the token contract.</p>
 <p>Example files:</p>
 <ul>
@@ -1035,6 +1035,21 @@ TEST_CASE(&quot;No duplicate dog names&quot;)
               &quot;bob&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
           &quot;could not insert object, most likely a uniqueness constraint was violated&quot;);
 }
+
+TEST_CASE(&quot;foo&quot;)
+{
+   test_chain chain;
+
+   //    std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp) &lt;&lt; &quot;\n&quot;;
+
+   std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp.to_time_point() +
+                                eosio::days(8) + eosio::hours(1))
+             &lt;&lt; &quot;\n&quot;;
+   chain.start_block(chain.get_head_block_info().timestamp.to_time_point() + eosio::days(8) +
+                     eosio::hours(1));
+   chain.finish_block();
+   std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp) &lt;&lt; &quot;\n&quot;;
+}
 </code></pre>
 <h2 id="running-the-test-1"><a class="header" href="#running-the-test-1">Running the test</a></h2>
 <p>This builds the contract, builds the tests, and runs the tests:</p>
@@ -1044,7 +1059,7 @@ cmake `clsdk-cmake-args` ..
 make -j $(nproc)
 cltester -v tests.wasm
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="asacttrace"><a class="header" href="#asacttrace">as/act/trace</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-asacttrace"><a class="header" href="#cltester-asacttrace">cltester: as/act/trace</a></h1>
 <p>The <code>test_chain</code> class supports this syntax for pushing single-action transactions:</p>
 <pre><code class="language-cpp">chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
        &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;memo&quot;);
@@ -1059,7 +1074,8 @@ cltester -v tests.wasm
 <p>The contract headers use <code>EOSIO_ACTIONS(...)</code> to define the action wrappers, e.g. <code>token::actions::transfer</code> or <code>example::actions::buydog</code>. The wrappers record the default contract name (e.g. <code>eosio.token</code>), the name of the action (e.g. <code>transfer</code>), and the argument types. This allows strong type safety. It also bypasses any need for ABIs.</p>
 <p><code>act</code> signs with <code>default_priv_key</code> - a well-known key used for testing (<code>5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3</code>). This key pairs with <code>default_pub_key</code> (<code>EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV</code>). Both the <code>create_account</code> and <code>create_code_account</code> methods create accounts with <code>default_pub_key</code>.</p>
 <h2 id="trace"><a class="header" href="#trace">trace</a></h2>
-<p>Like <code>act</code>, <code>trace&lt;action wrapper&gt;(action args)</code> creates, signs, and executes a single-action transaction. Unlike <code>act</code>, <code>trace</code> does not verify success. Instead, it returns the transaction's trace. We could display the trace:</p>
+<p>Like <code>act</code>, <code>trace&lt;action wrapper&gt;(action args)</code> creates, signs, and executes a single-action transaction. Unlike <code>act</code>, <code>trace</code> does not verify success. Instead, it returns the transaction's trace.</p>
+<p>We could display the trace:</p>
 <pre><code class="language-cpp">auto result = chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(
     &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 OTHER&quot;));
 std::cout &lt;&lt; format_json(result) &lt;&lt; &quot;\n&quot;;
@@ -1113,7 +1129,8 @@ std::cout &lt;&lt; format_json(result) &lt;&lt; &quot;\n&quot;;
          &quot;This contract does not deal with this token&quot;);
 </code></pre>
 <h2 id="with_code"><a class="header" href="#with_code">with_code</a></h2>
-<p>The action wrappers provide a default account name that the contract is normally installed on. e.g. the token wrappers assume <code>eosio.token</code>. <code>with_code</code> overrides this default. This example sets up a fake EOS token to try to fool our example code.</p>
+<p>The action wrappers provide a default account name that the contract is normally installed on. e.g. the token wrappers assume <code>eosio.token</code>. <code>with_code</code> overrides this default.</p>
+<p>This example sets up a fake EOS token to try to fool our example code.</p>
 <pre><code class="language-c++">// The hacker.token account runs the token contract
 chain.create_code_account(&quot;hacker.token&quot;_n);
 chain.set_code(&quot;hacker.token&quot;_n, CLSDK_CONTRACTS_DIR &quot;token.wasm&quot;);
@@ -1150,6 +1167,56 @@ alice.act&lt;example::actions::buydog&gt;(
 alice.act&lt;example::actions::buydog&gt;(
     &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-block-control"><a class="header" href="#cltester-block-control">cltester: Block Control</a></h1>
+<p>The <code>test_chain</code> class gives you control over block production, including control over time.</p>
+<h2 id="start_block"><a class="header" href="#start_block">start_block</a></h2>
+<p>At any point, you can start producing a new block:</p>
+<pre><code>chain.start_block();
+</code></pre>
+<p>This finishes producing the current block (if one is being produced), then starts producing a new one. All transactions after this point go into the new block.</p>
+<p>You can skip time:</p>
+<pre><code>chain.start_block(2000); // skip 2000ms-worth of blocks
+</code></pre>
+<ul>
+<li>0 skips nothing; the new block is 500ms after the current block being produced (if any), or 500ms after the previous block.</li>
+<li>500 skips 1 block</li>
+<li>1000 skips 2 blocks</li>
+</ul>
+<p>You can also skip to a specific time:</p>
+<pre><code>chain.start_block(&quot;2020-07-03T15:29:59.500&quot;);
+</code></pre>
+<p>or</p>
+<pre><code>eosio::time_point t = ...;
+chain.start_block(t);
+</code></pre>
+<p>Note when skipping time: <code>start_block</code> creates an empty block immediately before the new one. This allows TAPoS to operate correctly after skipping large periods of time.</p>
+<h2 id="finish_block"><a class="header" href="#finish_block">finish_block</a></h2>
+<p>At any point, you can stop producing the current block:</p>
+<pre><code>chain.finish_block();
+</code></pre>
+<p>After you call finish_block, the system is in a state where no blocks are being produced. The following cause the system to start producing a new block:</p>
+<ul>
+<li>using start_block</li>
+<li>pushing a transaction</li>
+<li>using finish_block again. This causes the system to start a new block then finish it.</li>
+</ul>
+<h2 id="getting-the-head-block-time"><a class="header" href="#getting-the-head-block-time">Getting the head block time</a></h2>
+<p>This gets the head block time as a <code>time_point</code>:</p>
+<pre><code>auto t = chain.get_head_block_info().timestamp.to_time_point();
+</code></pre>
+<p>Note: the head block is not the block that's currently being produced. Instead, it's the last block which was finished.</p>
+<p>You can display the time:</p>
+<pre><code>std::cout &lt;&lt; convert_to_json(t) &lt;&lt; &quot;\n&quot;;
+</code></pre>
+<p>You can also do arithmetic on time:</p>
+<pre><code>chain.start_block(
+   chain.get_head_block_info().timestamp.to_time_point() +
+   eosio::days(8) + eosio::hours(1));
+</code></pre>
+<h2 id="fixing-duplicate-transactions"><a class="header" href="#fixing-duplicate-transactions">Fixing duplicate transactions</a></h2>
+<p>It's easy to create a test which tries to push duplicate transactions. Call <code>start_block</code> before the duplicate transaction to solve this.</p>
+<h2 id="fixing-full-blocks"><a class="header" href="#fixing-full-blocks">Fixing full blocks</a></h2>
+<p>It's easy to overfill a block, causing a test failure. Use <code>start_block</code> to solve this.</p>
 
                     </main>
 

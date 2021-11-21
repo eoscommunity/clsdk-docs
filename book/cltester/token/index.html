@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="../../cltester/token/index.html" class="active"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="../../cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="../../cltester/token/index.html" class="active"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="../../cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="../../cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,7 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="token-support"><a class="header" href="#token-support">Token Support</a></h1>
+                        <h1 id="cltester-token-support"><a class="header" href="#cltester-token-support">cltester: Token Support</a></h1>
 <p>Our test cases need to interact with the token contract in order to fully test our example. clsdk comes with a cltester-ready version of the token contract.</p>
 <p>Example files:</p>
 <ul>
@@ -266,6 +266,21 @@ TEST_CASE(&quot;No duplicate dog names&quot;)
    expect(chain.as(&quot;bob&quot;_n).trace&lt;example::actions::buydog&gt;(  //
               &quot;bob&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
           &quot;could not insert object, most likely a uniqueness constraint was violated&quot;);
+}
+
+TEST_CASE(&quot;foo&quot;)
+{
+   test_chain chain;
+
+   //    std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp) &lt;&lt; &quot;\n&quot;;
+
+   std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp.to_time_point() +
+                                eosio::days(8) + eosio::hours(1))
+             &lt;&lt; &quot;\n&quot;;
+   chain.start_block(chain.get_head_block_info().timestamp.to_time_point() + eosio::days(8) +
+                     eosio::hours(1));
+   chain.finish_block();
+   std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp) &lt;&lt; &quot;\n&quot;;
 }
 </code></pre>
 <h2 id="running-the-test"><a class="header" href="#running-the-test">Running the test</a></h2>

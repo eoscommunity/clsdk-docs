@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Basic Contract - clsdk</title>
+        <title>Block Control - clsdk</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html" class="active"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="../../cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="../../cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="../../cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="../../cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="../../cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="../../cltester/block/index.html" class="active"><strong aria-hidden="true">4.4.</strong> Block Control</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,126 +142,65 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="basic-contract"><a class="header" href="#basic-contract">Basic Contract</a></h1>
-<p>Here is a basic contract definition. Place <code>example.cpp</code> and <code>CMakeLists.txt</code> in an empty folder.</p>
-<h2 id="examplecpp"><a class="header" href="#examplecpp"><code>example.cpp</code></a></h2>
-<pre><code class="language-cpp">#include &lt;eosio/asset.hpp&gt;
-#include &lt;eosio/eosio.hpp&gt;
-
-// The contract class must be in a namespace
-namespace example
-{
-   // The contract
-   struct example_contract : public eosio::contract
-   {
-      // Use the base class constructors
-      using eosio::contract::contract;
-
-      // Action: user buys a dog
-      void buydog(eosio::name user, eosio::name dog, const eosio::asset&amp; price)
-      {
-         // TODO: buy a dog
-      }
-   };
-
-   // First part of the dispatcher
-   EOSIO_ACTIONS(example_contract,  //
-                 &quot;example&quot;_n,       //
-                 action(buydog, user, dog, price))
-}  // namespace example
-
-// Final part of the dispatcher
-EOSIO_ACTION_DISPATCHER(example::actions)
-
-// ABI generation
-EOSIO_ABIGEN(actions(example::actions))
+                        <h1 id="cltester-block-control"><a class="header" href="#cltester-block-control">cltester: Block Control</a></h1>
+<p>The <code>test_chain</code> class gives you control over block production, including control over time.</p>
+<h2 id="start_block"><a class="header" href="#start_block">start_block</a></h2>
+<p>At any point, you can start producing a new block:</p>
+<pre><code>chain.start_block();
 </code></pre>
-<h2 id="cmakeliststxt"><a class="header" href="#cmakeliststxt"><code>CMakeLists.txt</code></a></h2>
-<pre><code># All cmake projects need these
-cmake_minimum_required(VERSION 3.16)
-project(example)
-
-# clsdk requires C++20
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Libraries for building contracts and tests
-find_package(clsdk REQUIRED)
-
-# Build example.wasm contract
-add_executable(example example.cpp)
-target_link_libraries(example eosio-contract-simple-malloc)
-
-# Generate example.abi
-# This is a 2-step process:
-#   * Build example.abi.wasm. This must link to eosio-contract-abigen.
-#   * Run the wasm to generate the abi
-add_executable(example-abigen example.cpp)
-target_link_libraries(example-abigen eosio-contract-abigen)
-add_custom_command(TARGET example-abigen POST_BUILD
-    COMMAND cltester example-abigen.wasm &gt;example.abi
-)
-
-# These symlinks help vscode
-execute_process(COMMAND ln -sf ${clsdk_DIR} ${CMAKE_CURRENT_BINARY_DIR}/clsdk)
-execute_process(COMMAND ln -sf ${WASI_SDK_PREFIX} ${CMAKE_CURRENT_BINARY_DIR}/wasi-sdk)
-
-# Generate compile_commands.json to aid vscode and other editors
-set(CMAKE_EXPORT_COMPILE_COMMANDS on)
+<p>This finishes producing the current block (if one is being produced), then starts producing a new one. All transactions after this point go into the new block.</p>
+<p>You can skip time:</p>
+<pre><code>chain.start_block(2000); // skip 2000ms-worth of blocks
 </code></pre>
-<h2 id="building"><a class="header" href="#building">Building</a></h2>
-<p>This will create <code>example.wasm</code> and <code>example.abi</code>:</p>
-<pre><code class="language-sh">mkdir build
-cd build
-cmake `clsdk-cmake-args` ..
-make -j $(nproc)
-</code></pre>
-<h2 id="trying-the-contract"><a class="header" href="#trying-the-contract">Trying the contract</a></h2>
-<p>clsdk comes with nodeos, cleos, and keosd. The following will execute the contract:</p>
-<pre><code># Start keosd on an empty directory
-killall keosd
-rm -rf testing-wallet testing-wallet-password
-mkdir testing-wallet
-keosd --wallet-dir `pwd`/testing-wallet --unlock-timeout 99999999 &gt;keosd.log 2&gt;&amp;1 &amp;
-
-# Create a default wallet. This saves the password in testing-wallet-password
-cleos wallet create -f testing-wallet-password
-
-# Add the default development key
-cleos wallet import --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
-
-# Start up a fresh chain
-killall nodeos
-rm -rf data config
-nodeos -d data --config-dir config --plugin eosio::chain_api_plugin --plugin eosio::producer_api_plugin -e -p eosio &gt;nodeos.log 2&gt;&amp;1 &amp;
-
-# Install the contract
-cleos create account eosio example EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV
-cleos set abi example example.abi
-cleos set code example example.wasm
-
-# Try out the contract (does nothing)
-cleos push action example buydog '[&quot;eosio&quot;, &quot;fido&quot;, &quot;100.0000 EOS&quot;]' -p eosio
-</code></pre>
-<h2 id="vscode-support"><a class="header" href="#vscode-support">vscode support</a></h2>
-<p>The following files configure vscode:</p>
 <ul>
-<li><a href=".vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
-<li><a href=".vscode/settings.json">.vscode/settings.json</a></li>
+<li>0 skips nothing; the new block is 500ms after the current block being produced (if any), or 500ms after the previous block.</li>
+<li>500 skips 1 block</li>
+<li>1000 skips 2 blocks</li>
 </ul>
-<p>Code completion and symbol lookup does not work until the project is built (above).</p>
+<p>You can also skip to a specific time:</p>
+<pre><code>chain.start_block(&quot;2020-07-03T15:29:59.500&quot;);
+</code></pre>
+<p>or</p>
+<pre><code>eosio::time_point t = ...;
+chain.start_block(t);
+</code></pre>
+<p>Note when skipping time: <code>start_block</code> creates an empty block immediately before the new one. This allows TAPoS to operate correctly after skipping large periods of time.</p>
+<h2 id="finish_block"><a class="header" href="#finish_block">finish_block</a></h2>
+<p>At any point, you can stop producing the current block:</p>
+<pre><code>chain.finish_block();
+</code></pre>
+<p>After you call finish_block, the system is in a state where no blocks are being produced. The following cause the system to start producing a new block:</p>
+<ul>
+<li>using start_block</li>
+<li>pushing a transaction</li>
+<li>using finish_block again. This causes the system to start a new block then finish it.</li>
+</ul>
+<h2 id="getting-the-head-block-time"><a class="header" href="#getting-the-head-block-time">Getting the head block time</a></h2>
+<p>This gets the head block time as a <code>time_point</code>:</p>
+<pre><code>auto t = chain.get_head_block_info().timestamp.to_time_point();
+</code></pre>
+<p>Note: the head block is not the block that's currently being produced. Instead, it's the last block which was finished.</p>
+<p>You can display the time:</p>
+<pre><code>std::cout &lt;&lt; convert_to_json(t) &lt;&lt; &quot;\n&quot;;
+</code></pre>
+<p>You can also do arithmetic on time:</p>
+<pre><code>chain.start_block(
+   chain.get_head_block_info().timestamp.to_time_point() +
+   eosio::days(8) + eosio::hours(1));
+</code></pre>
+<h2 id="fixing-duplicate-transactions"><a class="header" href="#fixing-duplicate-transactions">Fixing duplicate transactions</a></h2>
+<p>It's easy to create a test which tries to push duplicate transactions. Call <code>start_block</code> before the duplicate transaction to solve this.</p>
+<h2 id="fixing-full-blocks"><a class="header" href="#fixing-full-blocks">Fixing full blocks</a></h2>
+<p>It's easy to overfill a block, causing a test failure. Use <code>start_block</code> to solve this.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../ubuntu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../cltester/as/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../../contract/table/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -269,13 +208,10 @@ cleos push action example buydog '[&quot;eosio&quot;, &quot;fido&quot;, &quot;10
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../ubuntu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../cltester/as/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../../contract/table/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

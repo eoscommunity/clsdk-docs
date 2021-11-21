@@ -103,3 +103,18 @@ TEST_CASE("No duplicate dog names")
               "bob"_n, "fido"_n, s2a("100.0000 EOS")),
           "could not insert object, most likely a uniqueness constraint was violated");
 }
+
+TEST_CASE("foo")
+{
+   test_chain chain;
+
+   //    std::cout << convert_to_json(chain.get_head_block_info().timestamp) << "\n";
+
+   std::cout << convert_to_json(chain.get_head_block_info().timestamp.to_time_point() +
+                                eosio::days(8) + eosio::hours(1))
+             << "\n";
+   chain.start_block(chain.get_head_block_info().timestamp.to_time_point() + eosio::days(8) +
+                     eosio::hours(1));
+   chain.finish_block();
+   std::cout << convert_to_json(chain.get_head_block_info().timestamp) << "\n";
+}

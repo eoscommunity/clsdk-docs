@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="../../cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="../../cltester/as/index.html" class="active"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="../../cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="../../cltester/as/index.html" class="active"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="../../cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,7 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="asacttrace"><a class="header" href="#asacttrace">as/act/trace</a></h1>
+                        <h1 id="cltester-asacttrace"><a class="header" href="#cltester-asacttrace">cltester: as/act/trace</a></h1>
 <p>The <code>test_chain</code> class supports this syntax for pushing single-action transactions:</p>
 <pre><code class="language-cpp">chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
        &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;memo&quot;);
@@ -157,7 +157,8 @@
 <p>The contract headers use <code>EOSIO_ACTIONS(...)</code> to define the action wrappers, e.g. <code>token::actions::transfer</code> or <code>example::actions::buydog</code>. The wrappers record the default contract name (e.g. <code>eosio.token</code>), the name of the action (e.g. <code>transfer</code>), and the argument types. This allows strong type safety. It also bypasses any need for ABIs.</p>
 <p><code>act</code> signs with <code>default_priv_key</code> - a well-known key used for testing (<code>5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3</code>). This key pairs with <code>default_pub_key</code> (<code>EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV</code>). Both the <code>create_account</code> and <code>create_code_account</code> methods create accounts with <code>default_pub_key</code>.</p>
 <h2 id="trace"><a class="header" href="#trace">trace</a></h2>
-<p>Like <code>act</code>, <code>trace&lt;action wrapper&gt;(action args)</code> creates, signs, and executes a single-action transaction. Unlike <code>act</code>, <code>trace</code> does not verify success. Instead, it returns the transaction's trace. We could display the trace:</p>
+<p>Like <code>act</code>, <code>trace&lt;action wrapper&gt;(action args)</code> creates, signs, and executes a single-action transaction. Unlike <code>act</code>, <code>trace</code> does not verify success. Instead, it returns the transaction's trace.</p>
+<p>We could display the trace:</p>
 <pre><code class="language-cpp">auto result = chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(
     &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 OTHER&quot;));
 std::cout &lt;&lt; format_json(result) &lt;&lt; &quot;\n&quot;;
@@ -211,7 +212,8 @@ std::cout &lt;&lt; format_json(result) &lt;&lt; &quot;\n&quot;;
          &quot;This contract does not deal with this token&quot;);
 </code></pre>
 <h2 id="with_code"><a class="header" href="#with_code">with_code</a></h2>
-<p>The action wrappers provide a default account name that the contract is normally installed on. e.g. the token wrappers assume <code>eosio.token</code>. <code>with_code</code> overrides this default. This example sets up a fake EOS token to try to fool our example code.</p>
+<p>The action wrappers provide a default account name that the contract is normally installed on. e.g. the token wrappers assume <code>eosio.token</code>. <code>with_code</code> overrides this default.</p>
+<p>This example sets up a fake EOS token to try to fool our example code.</p>
 <pre><code class="language-c++">// The hacker.token account runs the token contract
 chain.create_code_account(&quot;hacker.token&quot;_n);
 chain.set_code(&quot;hacker.token&quot;_n, CLSDK_CONTRACTS_DIR &quot;token.wasm&quot;);
@@ -257,6 +259,9 @@ alice.act&lt;example::actions::buydog&gt;(
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next" href="../../cltester/block/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -268,6 +273,9 @@ alice.act&lt;example::actions::buydog&gt;(
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next" href="../../cltester/block/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
