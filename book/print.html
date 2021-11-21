@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.5.</strong> Starting nodeos</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1035,21 +1035,6 @@ TEST_CASE(&quot;No duplicate dog names&quot;)
               &quot;bob&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
           &quot;could not insert object, most likely a uniqueness constraint was violated&quot;);
 }
-
-TEST_CASE(&quot;foo&quot;)
-{
-   test_chain chain;
-
-   //    std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp) &lt;&lt; &quot;\n&quot;;
-
-   std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp.to_time_point() +
-                                eosio::days(8) + eosio::hours(1))
-             &lt;&lt; &quot;\n&quot;;
-   chain.start_block(chain.get_head_block_info().timestamp.to_time_point() + eosio::days(8) +
-                     eosio::hours(1));
-   chain.finish_block();
-   std::cout &lt;&lt; convert_to_json(chain.get_head_block_info().timestamp) &lt;&lt; &quot;\n&quot;;
-}
 </code></pre>
 <h2 id="running-the-test-1"><a class="header" href="#running-the-test-1">Running the test</a></h2>
 <p>This builds the contract, builds the tests, and runs the tests:</p>
@@ -1217,6 +1202,54 @@ chain.start_block(t);
 <p>It's easy to create a test which tries to push duplicate transactions. Call <code>start_block</code> before the duplicate transaction to solve this.</p>
 <h2 id="fixing-full-blocks"><a class="header" href="#fixing-full-blocks">Fixing full blocks</a></h2>
 <p>It's easy to overfill a block, causing a test failure. Use <code>start_block</code> to solve this.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-starting-nodeos"><a class="header" href="#cltester-starting-nodeos">cltester: Starting nodeos</a></h1>
+<p>cltester uses chainlib from nodeos, but cltester isn't nodeos, so is missing some functionality. e.g. it can't connect to nodes using p2p, and it can't serve json rpc requests. It can, however, spawn nodeos on a chain which cltester created. This can help with system-wide testing, e.g. testing nodejs and web apps.</p>
+<pre><code class="language-c++">TEST_CASE(&quot;start nodeos&quot;)
+{
+   // Prepare a chain
+   test_chain chain;
+   setup(chain);
+
+   // cltester doesn't need ABIs, but most other tools do
+   chain.set_abi(&quot;eosio.token&quot;_n, CLSDK_CONTRACTS_DIR &quot;token.abi&quot;);
+   chain.set_abi(&quot;example&quot;_n, &quot;testable.abi&quot;);
+
+   // Alice buys some dogs
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
+       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
+
+   // Make the above irreversible. This causes the transactions to
+   // go into the block log.
+   chain.finish_block();
+   chain.finish_block();
+
+   // Copy blocks.log into a fresh directory for nodeos to use
+   eosio::execute(&quot;rm -rf example_chain&quot;);
+   eosio::execute(&quot;mkdir -p example_chain/blocks&quot;);
+   eosio::execute(&quot;cp &quot; + chain.get_path() + &quot;/blocks/blocks.log example_chain/blocks&quot;);
+
+   // Run nodeos
+   eosio::execute(
+       &quot;nodeos -d example_chain &quot;
+       &quot;--config-dir example_config &quot;
+       &quot;--plugin eosio::chain_api_plugin &quot;
+       &quot;--access-control-allow-origin \&quot;*\&quot; &quot;
+       &quot;--access-control-allow-header \&quot;*\&quot; &quot;
+       &quot;--http-validate-host 0 &quot;
+       &quot;--http-server-address 0.0.0.0:8888 &quot;
+       &quot;--contracts-console &quot;
+       &quot;-e -p eosio&quot;);
+}
+</code></pre>
+<p>After running the above, cleos should now function:</p>
+<pre><code>cleos push action example buydog '[&quot;alice&quot;, &quot;spot&quot;, &quot;90.0000 EOS&quot;]' -p alice
+cleos get table example example balance
+cleos get table example example animal
+</code></pre>
 
                     </main>
 
