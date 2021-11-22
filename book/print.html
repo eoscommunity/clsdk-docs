@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.5.</strong> Starting nodeos</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.5.</strong> Starting nodeos</a></li><li class="chapter-item expanded "><a href="cltester/takeover/index.html"><strong aria-hidden="true">4.6.</strong> Hostile takeover</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1249,6 +1249,106 @@ chain.start_block(t);
 <pre><code>cleos push action example buydog '[&quot;alice&quot;, &quot;spot&quot;, &quot;90.0000 EOS&quot;]' -p alice
 cleos get table example example balance
 cleos get table example example animal
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-hostile-takeover"><a class="header" href="#cltester-hostile-takeover">cltester: Hostile takeover</a></h1>
+<p>cltester can fork the state of an existing chain. This example loads an EOS snapshot, replaces the eosio and producer keys, and launches a nodeos instance which acts as 21 producers.</p>
+<pre><code class="language-c++">TEST_CASE(&quot;Takeover&quot;)
+{
+   std::cout &lt;&lt; &quot;Loading snapshot...\n&quot;;
+
+   // This constructor loads a snapshot. The second argument is the max database size.
+   test_chain chain{&quot;/home/todd/work/snapshot-2021-11-21-22-eos-v4-0216739301.bin&quot;,
+                    uint64_t(20) * 1024 * 1024 * 1024};
+
+   // Replace production keys and eosio keys. These functions don't push any
+   // transactions. Instead, they directly modify the chain state in a way which
+   // violates consensus rules.
+   std::cout &lt;&lt; &quot;Replacing keys...\n&quot;;
+   chain.replace_producer_keys(test_chain::default_pub_key);
+   chain.replace_account_keys(&quot;eosio&quot;_n, &quot;owner&quot;_n, test_chain::default_pub_key);
+   chain.replace_account_keys(&quot;eosio&quot;_n, &quot;active&quot;_n, test_chain::default_pub_key);
+
+   // We replaced the production keys, but the system contract can switch
+   // them back. Let's fix that.
+   for (auto prod :
+        {&quot;atticlabeosb&quot;_n, &quot;aus1genereos&quot;_n, &quot;big.one&quot;_n,      &quot;binancestake&quot;_n, &quot;bitfinexeos1&quot;_n,
+         &quot;blockpooleos&quot;_n, &quot;eosasia11111&quot;_n, &quot;eoscannonchn&quot;_n, &quot;eoseouldotio&quot;_n, &quot;eosflytomars&quot;_n,
+         &quot;eoshuobipool&quot;_n, &quot;eosinfstones&quot;_n, &quot;eosiosg11111&quot;_n, &quot;eoslaomaocom&quot;_n, &quot;eosnationftw&quot;_n,
+         &quot;hashfineosio&quot;_n, &quot;newdex.bp&quot;_n,    &quot;okcapitalbp1&quot;_n, &quot;starteosiobp&quot;_n, &quot;whaleex.com&quot;_n,
+         &quot;zbeosbp11111&quot;_n})
+   {
+      std::cout &lt;&lt; &quot;    &quot; &lt;&lt; prod.to_string() &lt;&lt; &quot;\n&quot;;
+      chain.replace_account_keys(prod, &quot;owner&quot;_n, test_chain::default_pub_key);
+      chain.replace_account_keys(prod, &quot;active&quot;_n, test_chain::default_pub_key);
+      chain.transact({
+          action{{{&quot;eosio&quot;_n, &quot;owner&quot;_n}}, &quot;eosio.null&quot;_n, &quot;free.trx&quot;_n, std::tuple{}},
+          action{{{prod, &quot;owner&quot;_n}},
+                 &quot;eosio&quot;_n,
+                 &quot;regproducer&quot;_n,
+                 std::make_tuple(prod, test_chain::default_pub_key, std::string(&quot;url&quot;),
+                                 uint16_t(1234))},
+      });
+   }
+
+   // Make a donation. This works because eosio.rex delegates to eosio,
+   // and we replaced eosio's keys.
+   chain.transact({
+       action{{{&quot;eosio&quot;_n, &quot;owner&quot;_n}}, &quot;eosio.null&quot;_n, &quot;free.trx&quot;_n, std::tuple{}},
+       action{{{&quot;eosio.rex&quot;_n, &quot;owner&quot;_n}},
+              &quot;eosio.token&quot;_n,
+              &quot;transfer&quot;_n,
+              std::make_tuple(&quot;eosio.rex&quot;_n, &quot;genesis.eden&quot;_n, s2a(&quot;50000000.0000 EOS&quot;),
+                              std::string(&quot;donate&quot;))},
+   });
+
+   // Produce the block
+   chain.finish_block();
+
+   // shut down the chain so we can safely copy the database
+   std::cout &lt;&lt; &quot;Shutdown...\n&quot;;
+   chain.shutdown();
+
+   // Copy everything into a fresh directory for nodeos to use
+   std::cout &lt;&lt; &quot;Copy...\n&quot;;
+   eosio::execute(&quot;rm -rf forked_chain&quot;);
+   eosio::execute(&quot;cp -r &quot; + chain.get_path() + &quot; forked_chain&quot;);
+
+   // Run nodeos. We must use the build which is packaged with clsdk since we're
+   // loading the non-portable database.
+   std::cout &lt;&lt; &quot;Start nodeos...\n&quot;;
+   eosio::execute(
+       &quot;./clsdk/bin/nodeos &quot;
+       &quot;-d forked_chain &quot;
+       &quot;--config-dir example_config &quot;
+       &quot;--plugin eosio::chain_api_plugin &quot;
+       &quot;--access-control-allow-origin \&quot;*\&quot; &quot;
+       &quot;--access-control-allow-header \&quot;*\&quot; &quot;
+       &quot;--http-validate-host 0 &quot;
+       &quot;--http-server-address 0.0.0.0:8888 &quot;
+       &quot;--contracts-console &quot;
+       &quot;-e &quot;
+       &quot;-p atticlabeosb &quot;
+       &quot;-p aus1genereos &quot;
+       &quot;-p big.one &quot;
+       &quot;-p binancestake &quot;
+       &quot;-p bitfinexeos1 &quot;
+       &quot;-p blockpooleos &quot;
+       &quot;-p eosasia11111 &quot;
+       &quot;-p eoscannonchn &quot;
+       &quot;-p eoseouldotio &quot;
+       &quot;-p eosflytomars &quot;
+       &quot;-p eoshuobipool &quot;
+       &quot;-p eosinfstones &quot;
+       &quot;-p eosiosg11111 &quot;
+       &quot;-p eoslaomaocom &quot;
+       &quot;-p eosnationftw &quot;
+       &quot;-p hashfineosio &quot;
+       &quot;-p newdex.bp &quot;
+       &quot;-p okcapitalbp1 &quot;
+       &quot;-p starteosiobp &quot;
+       &quot;-p whaleex.com &quot;
+       &quot;-p zbeosbp11111 &quot;);
+}
 </code></pre>
 
                     </main>
