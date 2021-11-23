@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.4.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.5.</strong> Starting nodeos</a></li><li class="chapter-item expanded "><a href="cltester/takeover/index.html"><strong aria-hidden="true">4.6.</strong> Hostile takeover</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/config/index.html"><strong aria-hidden="true">4.4.</strong> Chain Configuration</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.5.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.6.</strong> Starting Nodeos</a></li><li class="chapter-item expanded "><a href="cltester/takeover/index.html"><strong aria-hidden="true">4.7.</strong> Hostile Takeover</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1152,6 +1152,73 @@ alice.act&lt;example::actions::buydog&gt;(
 alice.act&lt;example::actions::buydog&gt;(
     &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-chain-configuration"><a class="header" href="#cltester-chain-configuration">cltester: Chain Configuration</a></h1>
+<p>cltester comes with contracts for modifying consensus parameters and for activating protocol features. The headers for these contracts include utilities for installing, using, and uninstalling them.</p>
+<h2 id="setting-consensus-parameters"><a class="header" href="#setting-consensus-parameters">Setting Consensus Parameters</a></h2>
+<p>The <code>set_parameters</code> contract sets consensus parameters. The contract's header file includes a helper function (<code>setparams</code>) which loads the contract into the <code>eosio</code> account, calls it, then clears the eosio contract.</p>
+<pre><code class="language-c++">#include &lt;set_parameters/set_parameters.hpp&gt;
+
+TEST_CASE(&quot;setparams&quot;)
+{
+   test_chain chain;
+
+   // Allow deeper inline actions. Sets all other parameters to the default.
+   set_parameters::setparams(chain, {.max_inline_action_depth = 10});
+
+   // Use the chain...
+}
+</code></pre>
+<p><code>eosio::blockchain_parameters</code> has the following definition:</p>
+<pre><code class="language-c++">struct blockchain_parameters
+{
+   constexpr static int percent_1 = 100;  // 1 percent
+
+   uint64_t max_block_net_usage = 1024 * 1024;
+   uint32_t target_block_net_usage_pct = 10 * percent_1;
+   uint32_t max_transaction_net_usage = max_block_net_usage / 2;
+   uint32_t base_per_transaction_net_usage = 12;
+   uint32_t net_usage_leeway = 500;
+   uint32_t context_free_discount_net_usage_num = 20;
+   uint32_t context_free_discount_net_usage_den = 100;
+   uint32_t max_block_cpu_usage = 200'000;
+   uint32_t target_block_cpu_usage_pct = 10 * percent_1;
+   uint32_t max_transaction_cpu_usage = 3 * max_block_cpu_usage / 4;
+   uint32_t min_transaction_cpu_usage = 100;
+   uint32_t max_transaction_lifetime = 60 * 60;
+   uint32_t deferred_trx_expiration_window = 10 * 60;
+   uint32_t max_transaction_delay = 45 * 24 * 3600;
+   uint32_t max_inline_action_size = 512 * 1024;
+   uint16_t max_inline_action_depth = 4;
+   uint16_t max_authority_depth = 6;
+};
+</code></pre>
+<h2 id="activating-protocol-features"><a class="header" href="#activating-protocol-features">Activating Protocol Features</a></h2>
+<p>The <code>activate_feature</code> contract activates protocol features. The contract's header file includes a helper function (<code>activate</code>) which loads the contract into the <code>eosio</code> account, calls it, then clears the eosio contract.</p>
+<pre><code class="language-c++">#include &lt;activate_feature/activate_feature.hpp&gt;
+
+TEST_CASE(&quot;setparams&quot;)
+{
+   test_chain chain;
+
+   // Activate all 2.0 features
+   activate_feature::activate(chain, {
+      eosio::feature::only_link_to_existing_permission,
+      eosio::feature::forward_setcode,
+      eosio::feature::wtmsig_block_signatures,
+      eosio::feature::replace_deferred,
+      eosio::feature::no_duplicate_deferred_id,
+      eosio::feature::ram_restrictions,
+      eosio::feature::webauthn_key,
+      eosio::feature::disallow_empty_producer_schedule,
+      eosio::feature::only_bill_first_authorizer,
+      eosio::feature::restrict_action_to_self,
+      eosio::feature::fix_linkauth_restriction,
+      eosio::feature::get_sender,
+   });
+
+   // Use the chain...
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-block-control"><a class="header" href="#cltester-block-control">cltester: Block Control</a></h1>
 <p>The <code>test_chain</code> class gives you control over block production, including control over time.</p>
 <h2 id="start_block"><a class="header" href="#start_block">start_block</a></h2>
@@ -1202,7 +1269,7 @@ chain.start_block(t);
 <p>It's easy to create a test which tries to push duplicate transactions. Call <code>start_block</code> before the duplicate transaction to solve this.</p>
 <h2 id="fixing-full-blocks"><a class="header" href="#fixing-full-blocks">Fixing full blocks</a></h2>
 <p>It's easy to overfill a block, causing a test failure. Use <code>start_block</code> to solve this.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-starting-nodeos"><a class="header" href="#cltester-starting-nodeos">cltester: Starting nodeos</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-starting-nodeos"><a class="header" href="#cltester-starting-nodeos">cltester: Starting Nodeos</a></h1>
 <p>cltester uses chainlib from nodeos, but cltester isn't nodeos, so is missing some functionality. e.g. it can't connect to nodes using p2p, and it can't serve json rpc requests. It can, however, spawn nodeos on a chain which cltester created. This can help with system-wide testing, e.g. testing nodejs and web apps.</p>
 <pre><code class="language-c++">TEST_CASE(&quot;start nodeos&quot;)
 {
@@ -1250,7 +1317,7 @@ chain.start_block(t);
 cleos get table example example balance
 cleos get table example example animal
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-hostile-takeover"><a class="header" href="#cltester-hostile-takeover">cltester: Hostile takeover</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-hostile-takeover"><a class="header" href="#cltester-hostile-takeover">cltester: Hostile Takeover</a></h1>
 <p>cltester can fork the state of an existing chain. This example loads an EOS snapshot, replaces the eosio and producer keys, and launches a nodeos instance which acts as 21 producers.</p>
 <pre><code class="language-c++">TEST_CASE(&quot;Takeover&quot;)
 {
