@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.3.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/config/index.html"><strong aria-hidden="true">4.4.</strong> Chain Configuration</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.5.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.6.</strong> Starting Nodeos</a></li><li class="chapter-item expanded "><a href="cltester/takeover/index.html"><strong aria-hidden="true">4.7.</strong> Hostile Takeover</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/tables/index.html"><strong aria-hidden="true">4.3.</strong> Reading Tables</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.4.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/config/index.html"><strong aria-hidden="true">4.5.</strong> Chain Configuration</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.6.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.7.</strong> Starting Nodeos</a></li><li class="chapter-item expanded "><a href="cltester/takeover/index.html"><strong aria-hidden="true">4.8.</strong> Hostile Takeover</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -978,62 +978,37 @@ void setup(test_chain&amp; t)
    setup_example(t);
 }
 
-TEST_CASE(&quot;Alice Attacks&quot;)
+//////
+
+template &lt;typename Table&gt;
+void dump_table(name contract, uint64_t scope)
 {
-   // This is the first blockchain
-   test_chain chain;
-   setup(chain);
-
-   // Alice tries to get a dog for free
-   // This verifies the appropriate error is produced
-   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
-              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;0.0000 EOS&quot;)),
-          &quot;Dogs cost more than that&quot;);
-
-   // Alice tries to buy a dog, but hasn't transferred any tokens to the contract
-   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
-              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
-          &quot;user does not have a balance&quot;);
-
-   // Alice tries to transfer an unsupported token to the contract
-   expect(chain.as(&quot;alice&quot;_n).trace&lt;token::actions::transfer&gt;(  //
-              &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;100.0000 OTHER&quot;), &quot;&quot;),
-          &quot;This contract does not deal with this token&quot;);
-
-   // Alice transfers the correct token
-   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(  //
-       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
-
-   // Alice tries to get sneaky with the wrong token
-   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
-              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 OTHER&quot;)),
-          &quot;This contract does not deal with this token&quot;);
+   Table table(contract, scope);
+   for (auto&amp; record : table)
+      std::cout &lt;&lt; format_json(record) &lt;&lt; &quot;\n&quot;;
 }
 
-TEST_CASE(&quot;No duplicate dog names&quot;)
+TEST_CASE(&quot;Read Database 2&quot;)
 {
-   // This is a different blockchain than used from the previous test
    test_chain chain;
    setup(chain);
 
-   // Alice goes first
-   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(  //
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
        &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
-   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(  //
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
        &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;));
-   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(  //
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
        &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
-
-   // Bob is next
-   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(  //
+   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(
        &quot;bob&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
-   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(  //
+   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(
        &quot;bob&quot;_n, &quot;wolf&quot;_n, s2a(&quot;100.0000 EOS&quot;));
 
-   // Sorry, Bob
-   expect(chain.as(&quot;bob&quot;_n).trace&lt;example::actions::buydog&gt;(  //
-              &quot;bob&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
-          &quot;could not insert object, most likely a uniqueness constraint was violated&quot;);
+   printf(&quot;\nBalances\n=====\n&quot;);
+   dump_table&lt;example::balance_table&gt;(&quot;example&quot;_n, &quot;example&quot;_n.value);
+
+   printf(&quot;\nAnimals\n=====\n&quot;);
+   dump_table&lt;example::animal_table&gt;(&quot;example&quot;_n, &quot;example&quot;_n.value);
 }
 </code></pre>
 <h2 id="running-the-test-1"><a class="header" href="#running-the-test-1">Running the test</a></h2>
@@ -1044,6 +1019,141 @@ cmake `clsdk-cmake-args` ..
 make -j $(nproc)
 cltester -v tests.wasm
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-reading-tables"><a class="header" href="#cltester-reading-tables">cltester: Reading Tables</a></h1>
+<p>Test cases can use the same database facilities (read-only) that contracts use. If contracts define all their tables in headers, then the test cases can get the table definitions from the headers.</p>
+<h2 id="dumping-table-content"><a class="header" href="#dumping-table-content">Dumping table content</a></h2>
+<p>The tables in the example contract use a single scope. This makes it possible to iterate through all of the content in a table. The token contract uses a different scope for each user. This makes iteration infeasible. Instead, the test code has to explicitly specify each account to list the accounts' balances.</p>
+<p>This extends the test cases in <a href="cltester/tables/../token/index.html">Token Support</a>:</p>
+<pre><code class="language-c++">void dump_tokens(const std::vector&lt;name&gt; owners)
+{
+   printf(&quot;\nTokens\n=====\n&quot;);
+   for (auto owner : owners)
+   {
+      token::accounts table(&quot;eosio.token&quot;_n, owner.value);
+      for (auto&amp; account : table)
+         printf(&quot;%-12s %s\n&quot;,
+                owner.to_string().c_str(),
+                account.balance.to_string().c_str());
+   }
+}
+
+void dump_animals()
+{
+   printf(&quot;\nAnimals\n=====\n&quot;);
+   example::animal_table table(&quot;example&quot;_n, &quot;example&quot;_n.value);
+   for (auto&amp; animal : table)
+      printf(&quot;%-12s %-12s %-12s %s\n&quot;,
+             animal.name.to_string().c_str(),
+             animal.type.to_string().c_str(),
+             animal.owner.to_string().c_str(),
+             animal.purchase_price.to_string().c_str());
+}
+
+TEST_CASE(&quot;Read Database&quot;)
+{
+   test_chain chain;
+   setup(chain);
+
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
+       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
+   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(
+       &quot;bob&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;bob&quot;_n, &quot;wolf&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+
+   dump_tokens({&quot;eosio&quot;_n, &quot;alice&quot;_n, &quot;bob&quot;_n, &quot;example&quot;_n});
+   dump_animals();
+}
+</code></pre>
+<h2 id="json-form"><a class="header" href="#json-form">JSON form</a></h2>
+<p>clsdk comes with json conversion functions. These can aid dumping tables.</p>
+<pre><code class="language-c++">template &lt;typename Table&gt;
+void dump_table(name contract, uint64_t scope)
+{
+   Table table(contract, scope);
+   for (auto&amp; record : table)
+      std::cout &lt;&lt; format_json(record) &lt;&lt; &quot;\n&quot;;
+}
+
+TEST_CASE(&quot;Read Database 2&quot;)
+{
+   test_chain chain;
+   setup(chain);
+
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
+       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
+   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(
+       &quot;bob&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;bob&quot;_n, &quot;wolf&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+
+   printf(&quot;\nBalances\n=====\n&quot;);
+   dump_table&lt;example::balance_table&gt;(&quot;example&quot;_n, &quot;example&quot;_n.value);
+
+   printf(&quot;\nAnimals\n=====\n&quot;);
+   dump_table&lt;example::animal_table&gt;(&quot;example&quot;_n, &quot;example&quot;_n.value);
+}
+</code></pre>
+<h2 id="verifying-table-content"><a class="header" href="#verifying-table-content">Verifying table content</a></h2>
+<p>Test cases often need to verify table content is correct.</p>
+<pre><code class="language-c++">example::animal get_animal(name animal_name)
+{
+   example::animal_table table(&quot;example&quot;_n, &quot;example&quot;_n.value);
+   auto it = table.find(animal_name.value);
+   if (it != table.end())
+      return *it;
+   else
+      return {};  // return empty record if not found
+}
+
+TEST_CASE(&quot;Verify Animals&quot;)
+{
+   test_chain chain;
+   setup(chain);
+
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
+       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
+   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(
+       &quot;bob&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(
+       &quot;bob&quot;_n, &quot;wolf&quot;_n, s2a(&quot;100.0000 EOS&quot;));
+
+   auto fido = get_animal(&quot;fido&quot;_n);
+   CHECK(fido.name == &quot;fido&quot;_n);
+   CHECK(fido.type == &quot;dog&quot;_n);
+   CHECK(fido.owner == &quot;alice&quot;_n);
+   CHECK(fido.purchase_price == s2a(&quot;100.0000 EOS&quot;));
+}
+</code></pre>
+<p>The CHECK macro verifies its condition is met. The <code>-s</code> command-line option shows the progress of these checks:</p>
+<pre><code>$ cltester tests.wasm -s
+
+...
+/.../tests.cpp:78: PASSED:
+  CHECK( fido.name == &quot;fido&quot;_n )
+with expansion:
+  fido == fido
+
+/.../tests.cpp:79: PASSED:
+  CHECK( fido.type == &quot;dog&quot;_n )
+with expansion:
+  dog == dog
+...
+</code></pre>
+<h2 id="table-caching-issue"><a class="header" href="#table-caching-issue">Table caching issue</a></h2>
+<p>The above examples open tables within helper functions to avoid an issue with <code>multi_index</code>. multi_index caches data and so gets confused if a contract modifies a table while the tester has that table currently open.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cltester-asacttrace"><a class="header" href="#cltester-asacttrace">cltester: as/act/trace</a></h1>
 <p>The <code>test_chain</code> class supports this syntax for pushing single-action transactions:</p>
 <pre><code class="language-cpp">chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(

@@ -46,60 +46,35 @@ void setup(test_chain& t)
    setup_example(t);
 }
 
-TEST_CASE("Alice Attacks")
+//////
+
+template <typename Table>
+void dump_table(name contract, uint64_t scope)
 {
-   // This is the first blockchain
-   test_chain chain;
-   setup(chain);
-
-   // Alice tries to get a dog for free
-   // This verifies the appropriate error is produced
-   expect(chain.as("alice"_n).trace<example::actions::buydog>(  //
-              "alice"_n, "fido"_n, s2a("0.0000 EOS")),
-          "Dogs cost more than that");
-
-   // Alice tries to buy a dog, but hasn't transferred any tokens to the contract
-   expect(chain.as("alice"_n).trace<example::actions::buydog>(  //
-              "alice"_n, "fido"_n, s2a("100.0000 EOS")),
-          "user does not have a balance");
-
-   // Alice tries to transfer an unsupported token to the contract
-   expect(chain.as("alice"_n).trace<token::actions::transfer>(  //
-              "alice"_n, "example"_n, s2a("100.0000 OTHER"), ""),
-          "This contract does not deal with this token");
-
-   // Alice transfers the correct token
-   chain.as("alice"_n).act<token::actions::transfer>(  //
-       "alice"_n, "example"_n, s2a("300.0000 EOS"), "");
-
-   // Alice tries to get sneaky with the wrong token
-   expect(chain.as("alice"_n).trace<example::actions::buydog>(  //
-              "alice"_n, "fido"_n, s2a("100.0000 OTHER")),
-          "This contract does not deal with this token");
+   Table table(contract, scope);
+   for (auto& record : table)
+      std::cout << format_json(record) << "\n";
 }
 
-TEST_CASE("No duplicate dog names")
+TEST_CASE("Read Database 2")
 {
-   // This is a different blockchain than used from the previous test
    test_chain chain;
    setup(chain);
 
-   // Alice goes first
-   chain.as("alice"_n).act<token::actions::transfer>(  //
+   chain.as("alice"_n).act<token::actions::transfer>(
        "alice"_n, "example"_n, s2a("300.0000 EOS"), "");
-   chain.as("alice"_n).act<example::actions::buydog>(  //
+   chain.as("alice"_n).act<example::actions::buydog>(
        "alice"_n, "fido"_n, s2a("100.0000 EOS"));
-   chain.as("alice"_n).act<example::actions::buydog>(  //
+   chain.as("alice"_n).act<example::actions::buydog>(
        "alice"_n, "barf"_n, s2a("110.0000 EOS"));
-
-   // Bob is next
-   chain.as("bob"_n).act<token::actions::transfer>(  //
+   chain.as("bob"_n).act<token::actions::transfer>(
        "bob"_n, "example"_n, s2a("300.0000 EOS"), "");
-   chain.as("bob"_n).act<example::actions::buydog>(  //
+   chain.as("bob"_n).act<example::actions::buydog>(
        "bob"_n, "wolf"_n, s2a("100.0000 EOS"));
 
-   // Sorry, Bob
-   expect(chain.as("bob"_n).trace<example::actions::buydog>(  //
-              "bob"_n, "fido"_n, s2a("100.0000 EOS")),
-          "could not insert object, most likely a uniqueness constraint was violated");
+   printf("\nBalances\n=====\n");
+   dump_table<example::balance_table>("example"_n, "example"_n.value);
+
+   printf("\nAnimals\n=====\n");
+   dump_table<example::animal_table>("example"_n, "example"_n.value);
 }
