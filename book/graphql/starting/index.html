@@ -205,6 +205,13 @@ void example::example_contract::graphqlschema()
    eosio::print(btb::get_gql_schema&lt;Query&gt;());
 }
 </code></pre>
+<h2 id="const"><a class="header" href="#const">const</a></h2>
+<pre><code class="language-cpp">std::optional&lt;example::animal&gt; animal(eosio::name name) const
+{
+   // ...
+}
+</code></pre>
+<p>Since btb's GraphQL system doesn't support mutation, query methods must be marked <code>const</code> as above. It ignores non-const methods.</p>
 <h2 id="starting-the-example"><a class="header" href="#starting-the-example">Starting the Example</a></h2>
 <p>This builds the example and starts nodeos:</p>
 <pre><code>mkdir build
