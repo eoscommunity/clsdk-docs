@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/tables/index.html"><strong aria-hidden="true">4.3.</strong> Reading Tables</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.4.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/config/index.html"><strong aria-hidden="true">4.5.</strong> Chain Configuration</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.6.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.7.</strong> Starting Nodeos</a></li><li class="chapter-item expanded "><a href="cltester/takeover/index.html"><strong aria-hidden="true">4.8.</strong> Hostile Takeover</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="cltester/tables/index.html"><strong aria-hidden="true">4.3.</strong> Reading Tables</a></li><li class="chapter-item expanded "><a href="cltester/as/index.html"><strong aria-hidden="true">4.4.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="cltester/config/index.html"><strong aria-hidden="true">4.5.</strong> Chain Configuration</a></li><li class="chapter-item expanded "><a href="cltester/block/index.html"><strong aria-hidden="true">4.6.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="cltester/nodeos/index.html"><strong aria-hidden="true">4.7.</strong> Starting Nodeos</a></li><li class="chapter-item expanded "><a href="cltester/takeover/index.html"><strong aria-hidden="true">4.8.</strong> Hostile Takeover</a></li></ol></li><li class="chapter-item expanded "><a href="graphql/index.html"><strong aria-hidden="true">5.</strong> GraphQL</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="graphql/starting/index.html"><strong aria-hidden="true">5.1.</strong> Getting Started</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -978,37 +978,62 @@ void setup(test_chain&amp; t)
    setup_example(t);
 }
 
-//////
-
-template &lt;typename Table&gt;
-void dump_table(name contract, uint64_t scope)
+TEST_CASE(&quot;Alice Attacks&quot;)
 {
-   Table table(contract, scope);
-   for (auto&amp; record : table)
-      std::cout &lt;&lt; format_json(record) &lt;&lt; &quot;\n&quot;;
-}
-
-TEST_CASE(&quot;Read Database 2&quot;)
-{
+   // This is the first blockchain
    test_chain chain;
    setup(chain);
 
-   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(
+   // Alice tries to get a dog for free
+   // This verifies the appropriate error is produced
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;0.0000 EOS&quot;)),
+          &quot;Dogs cost more than that&quot;);
+
+   // Alice tries to buy a dog, but hasn't transferred any tokens to the contract
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
+          &quot;user does not have a balance&quot;);
+
+   // Alice tries to transfer an unsupported token to the contract
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;token::actions::transfer&gt;(  //
+              &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;100.0000 OTHER&quot;), &quot;&quot;),
+          &quot;This contract does not deal with this token&quot;);
+
+   // Alice transfers the correct token
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(  //
        &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
-   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+
+   // Alice tries to get sneaky with the wrong token
+   expect(chain.as(&quot;alice&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 OTHER&quot;)),
+          &quot;This contract does not deal with this token&quot;);
+}
+
+TEST_CASE(&quot;No duplicate dog names&quot;)
+{
+   // This is a different blockchain than used from the previous test
+   test_chain chain;
+   setup(chain);
+
+   // Alice goes first
+   chain.as(&quot;alice&quot;_n).act&lt;token::actions::transfer&gt;(  //
+       &quot;alice&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(  //
        &quot;alice&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;));
-   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(
+   chain.as(&quot;alice&quot;_n).act&lt;example::actions::buydog&gt;(  //
        &quot;alice&quot;_n, &quot;barf&quot;_n, s2a(&quot;110.0000 EOS&quot;));
-   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(
+
+   // Bob is next
+   chain.as(&quot;bob&quot;_n).act&lt;token::actions::transfer&gt;(  //
        &quot;bob&quot;_n, &quot;example&quot;_n, s2a(&quot;300.0000 EOS&quot;), &quot;&quot;);
-   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(
+   chain.as(&quot;bob&quot;_n).act&lt;example::actions::buydog&gt;(  //
        &quot;bob&quot;_n, &quot;wolf&quot;_n, s2a(&quot;100.0000 EOS&quot;));
 
-   printf(&quot;\nBalances\n=====\n&quot;);
-   dump_table&lt;example::balance_table&gt;(&quot;example&quot;_n, &quot;example&quot;_n.value);
-
-   printf(&quot;\nAnimals\n=====\n&quot;);
-   dump_table&lt;example::animal_table&gt;(&quot;example&quot;_n, &quot;example&quot;_n.value);
+   // Sorry, Bob
+   expect(chain.as(&quot;bob&quot;_n).trace&lt;example::actions::buydog&gt;(  //
+              &quot;bob&quot;_n, &quot;fido&quot;_n, s2a(&quot;100.0000 EOS&quot;)),
+          &quot;could not insert object, most likely a uniqueness constraint was violated&quot;);
 }
 </code></pre>
 <h2 id="running-the-test-1"><a class="header" href="#running-the-test-1">Running the test</a></h2>
@@ -1525,6 +1550,134 @@ cleos get table example example animal
        &quot;-p starteosiobp &quot;
        &quot;-p whaleex.com &quot;
        &quot;-p zbeosbp11111 &quot;);
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="graphql"><a class="header" href="#graphql">GraphQL</a></h1>
+<p>clsdk comes with the blocks-to-browser (btb) system. btb includes a library that supports running GraphQL queries within WASM. This chapter introduces GraphQL support separate from the rest of the btb system by running GraphQL within contracts. It doesn't use the new action-return-value system introduced with nodeos 2.1. Instead, it uses contract prints for compatibility with nodeos 2.0.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="graphql-getting-started"><a class="header" href="#graphql-getting-started">GraphQL: Getting Started</a></h1>
+<h2 id="contract-and-test-modifications"><a class="header" href="#contract-and-test-modifications">Contract and Test Modifications</a></h2>
+<p>This example is based on the <a href="graphql/starting/../../cltester/token/index.html">cltester Token Example</a>, but has these changes:</p>
+<ul>
+<li>The contract has two new actions: <code>graphql</code> and <code>graphqlschema</code>, which are shown below</li>
+<li><code>CMakeLists.txt</code> adds the <code>btb</code> and <code>btb-debug</code> libraries as dependencies to <code>example.wasm</code> and <code>example-debug.wasm</code></li>
+<li>The test case sets up a chain and starts nodeos</li>
+</ul>
+<p>The files:</p>
+<ul>
+<li><a href="graphql/starting/example.hpp">example.hpp</a></li>
+<li><a href="graphql/starting/example.cpp">example.cpp</a></li>
+<li><a href="graphql/starting/example-graphql.cpp">example-graphql.cpp</a></li>
+<li><a href="graphql/starting/tests.cpp">tests.cpp</a></li>
+<li><a href="graphql/starting/CMakeLists.txt">CMakeLists.txt</a></li>
+<li><a href="graphql/starting/.vscode/c_cpp_properties.json">.vscode/c_cpp_properties.json</a></li>
+<li><a href="graphql/starting/.vscode/settings.json">.vscode/settings.json</a></li>
+</ul>
+<h2 id="simple-graphql-query"><a class="header" href="#simple-graphql-query">Simple GraphQL Query</a></h2>
+<p><code>example-graphql.cpp</code>:</p>
+<pre><code class="language-cpp">#include &quot;example.hpp&quot;
+
+// GraphQL Support
+#include &lt;btb/graphql.hpp&gt;
+
+// EOSIO_REFLECT2; augments methods with argument names
+#include &lt;eosio/reflection2.hpp&gt;
+
+// The root of GraphQL queries
+struct Query
+{
+   // Identify the contract
+   eosio::name contract;
+
+   // Retrieve an animal, if it exists
+   std::optional&lt;example::animal&gt; animal(eosio::name name) const
+   {
+      example::animal_table table{contract, contract.value};
+      auto it = table.find(name.value);
+      if (it != table.end())
+         return *it;
+      else
+         return std::nullopt;
+   }
+};
+EOSIO_REFLECT2(Query,                  //
+               contract,               // query a field
+               method(animal, &quot;name&quot;)  // query a method; identifies the argument names
+)
+
+// Action: execute a GraphQL query and print the result
+void example::example_contract::graphql(const std::string&amp; query)
+{
+   Query root{get_self()};
+   eosio::print(btb::gql_query(root, query, &quot;&quot;));
+}
+
+// Action: print the GraphQL schema
+void example::example_contract::graphqlschema()
+{
+   eosio::print(btb::get_gql_schema&lt;Query&gt;());
+}
+</code></pre>
+<h2 id="starting-the-example"><a class="header" href="#starting-the-example">Starting the Example</a></h2>
+<p>This builds the example and starts nodeos:</p>
+<pre><code>mkdir build
+cd build
+cmake `clsdk-cmake-args` ..
+make -j $(nproc)
+cltester tests.wasm
+</code></pre>
+<h2 id="fetching-the-schema"><a class="header" href="#fetching-the-schema">Fetching the Schema</a></h2>
+<p>This uses cleos to fetch the schema. cleos's <code>-v</code> option shows print output.</p>
+<pre><code>$ cleos -v push action example graphqlschema '[]' -p alice
+
+executed transaction: 79a16e17d6bde46a219a9e721ed17d610bbf7c2fa988f7db14e44b7e7fda97ae  96 bytes  185 us
+#       example &lt;= example::graphqlschema       &quot;&quot;
+&gt;&gt; type animal {
+&gt;&gt;     name: String!
+&gt;&gt;     type: String!
+&gt;&gt;     owner: String!
+&gt;&gt;     purchase_price: String!
+&gt;&gt; }
+&gt;&gt; type Query {
+&gt;&gt;     contract: String!
+&gt;&gt;     animal(name: String!): animal
+&gt;&gt; }
+</code></pre>
+<h2 id="querying-the-contract-name"><a class="header" href="#querying-the-contract-name">Querying the Contract Name</a></h2>
+<p>This queries the contract name:</p>
+<pre><code>$ cleos -v push action example graphql '[&quot;{contract}&quot;,&quot;&quot;]' -p alice
+
+executed transaction: 50fa29906ed5b40b3c51dc396f2262c292eda6970813909ff3e06ebf18f618f2  104 bytes  177 us
+#       example &lt;= example::graphql             {&quot;query&quot;:&quot;{contract}&quot;}
+&gt;&gt; {&quot;data&quot;: {&quot;contract&quot;:&quot;example&quot;}}
+</code></pre>
+<h2 id="querying-an-animal"><a class="header" href="#querying-an-animal">Querying an Animal</a></h2>
+<p>This queries a specific animal.</p>
+<pre><code>$ cleos -v push action example graphql '[&quot;{animal(name:\&quot;fido\&quot;){name,type,owner,purchase_price}}&quot;,&quot;&quot;]' -p alice
+
+executed transaction: 636a96b15cf7c1478992fc8f27716da7fc9c60105144a4c43ecf21035e840454  152 bytes  181 us
+#       example &lt;= example::graphql             {&quot;query&quot;:&quot;{animal(name:\&quot;fido\&quot;){name,type,owner,purchase_price}}&quot;}
+&gt;&gt; {&quot;data&quot;: {&quot;animal&quot;:{&quot;name&quot;:&quot;fido&quot;,&quot;type&quot;:&quot;dog&quot;,&quot;owner&quot;:&quot;alice&quot;,&quot;purchase_price&quot;:&quot;100.0000 EOS&quot;}}}
+</code></pre>
+<p>Here's the GraphQL query above:</p>
+<pre><code>{
+  animal(name: &quot;fido&quot;) {
+    name
+    type
+    owner
+    purchase_price
+  }
+}
+</code></pre>
+<p>Here's the formatted output:</p>
+<pre><code>{
+    &quot;data&quot;: {
+        &quot;animal&quot;: {
+            &quot;name&quot;: &quot;fido&quot;,
+            &quot;type&quot;: &quot;dog&quot;,
+            &quot;owner&quot;: &quot;alice&quot;,
+            &quot;purchase_price&quot;: &quot;100.0000 EOS&quot;
+        }
+    }
 }
 </code></pre>
 
