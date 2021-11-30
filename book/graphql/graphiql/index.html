@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GraphiQL UI - clsdk</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> Installation</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ubuntu.html"><strong aria-hidden="true">2.1.</strong> Ubuntu Installation</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Contracts</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/basic/index.html"><strong aria-hidden="true">3.1.</strong> Basic Contract</a></li><li class="chapter-item expanded "><a href="../../contract/table/index.html"><strong aria-hidden="true">3.2.</strong> Tables</a></li><li class="chapter-item expanded "><a href="../../contract/notify/index.html"><strong aria-hidden="true">3.3.</strong> Notifications</a></li><li class="chapter-item expanded "><a href="../../contract/debug/index.html"><strong aria-hidden="true">3.4.</strong> Debugging</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contract/debug/vscode.html"><strong aria-hidden="true">3.4.1.</strong> With vscode</a></li><li class="chapter-item expanded "><a href="../../contract/debug/gdb.html"><strong aria-hidden="true">3.4.2.</strong> With gdb</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> cltester</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/index.html"><strong aria-hidden="true">4.1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../cltester/starting/vscode.html"><strong aria-hidden="true">4.1.1.</strong> Debugging with vscode</a></li><li class="chapter-item expanded "><a href="../../cltester/starting/gdb.html"><strong aria-hidden="true">4.1.2.</strong> Debugging with gdb</a></li></ol></li><li class="chapter-item expanded "><a href="../../cltester/token/index.html"><strong aria-hidden="true">4.2.</strong> Token Support</a></li><li class="chapter-item expanded "><a href="../../cltester/tables/index.html"><strong aria-hidden="true">4.3.</strong> Reading Tables</a></li><li class="chapter-item expanded "><a href="../../cltester/as/index.html"><strong aria-hidden="true">4.4.</strong> as/act/trace</a></li><li class="chapter-item expanded "><a href="../../cltester/config/index.html"><strong aria-hidden="true">4.5.</strong> Chain Configuration</a></li><li class="chapter-item expanded "><a href="../../cltester/block/index.html"><strong aria-hidden="true">4.6.</strong> Block Control</a></li><li class="chapter-item expanded "><a href="../../cltester/nodeos/index.html"><strong aria-hidden="true">4.7.</strong> Starting Nodeos</a></li><li class="chapter-item expanded "><a href="../../cltester/takeover/index.html"><strong aria-hidden="true">4.8.</strong> Hostile Takeover</a></li></ol></li><li class="chapter-item expanded "><a href="../../graphql/index.html"><strong aria-hidden="true">5.</strong> GraphQL</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../graphql/starting/index.html"><strong aria-hidden="true">5.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="../../graphql/graphiql/index.html" class="active"><strong aria-hidden="true">5.2.</strong> GraphiQL UI</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">clsdk</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="graphql-graphiql-ui"><a class="header" href="#graphql-graphiql-ui">GraphQL: GraphiQL UI</a></h1>
+<p>cleos isn't very handy for running GraphQL queries. This webapp, based on GraphiQL, provides a friendlier alternative.</p>
+<p>The files:</p>
+<ul>
+<li><a href="app.html">app.html</a></li>
+<li><a href="index.tsx">index.tsx</a></li>
+<li><a href="package.json">package.json</a></li>
+<li><a href="tsconfig.json">tsconfig.json</a></li>
+<li><a href="webpack.config.js">webpack.config.js</a></li>
+<li><a href="yarn.lock">yarn.lock</a></li>
+</ul>
+<h2 id="building-and-running"><a class="header" href="#building-and-running">Building and Running</a></h2>
+<ul>
+<li>Follow the instructions in <a href="../starting/index.html#starting-the-example">GraphQL: Getting Started</a> to start nodeos</li>
+<li>Run <code>yarn &amp;&amp; yarn build &amp;&amp; yarn start</code></li>
+<li>Open <a href="http://localhost:3000/">http://localhost:3000/</a></li>
+</ul>
+<h2 id="indextsx"><a class="header" href="#indextsx">index.tsx</a></h2>
+<p><code>index.tsx</code>:</p>
+<pre><code class="language-cpp">import { JsonRpc } from &quot;eosjs/dist/eosjs-jsonrpc&quot;;
+import { Api } from &quot;eosjs/dist/eosjs-api&quot;;
+import { JsSignatureProvider } from &quot;eosjs/dist/eosjs-jssig&quot;;
+import React from &quot;react&quot;;
+import { render } from &quot;react-dom&quot;;
+import GraphiQL from &quot;graphiql&quot;;
+import { buildSchema, GraphQLSchema } from &quot;graphql&quot;;
+import &quot;./node_modules/graphiql/graphiql.min.css&quot;;
+global.Buffer = require(&quot;buffer/&quot;).Buffer;
+
+// nodeos RPC endpoint
+const rpcUrl =
+    window.location.protocol + &quot;//&quot; + window.location.hostname + &quot;:8888&quot;;
+
+// This contract runs the graphql queries
+const contract = &quot;example&quot;;
+
+// user which authorizes queries
+const user = &quot;eosio&quot;;
+
+// user's private key
+const privateKey = &quot;5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3&quot;;
+
+// eosjs
+let rpc = new JsonRpc(rpcUrl);
+let signatureProvider = new JsSignatureProvider([privateKey]);
+let api = new Api({ rpc, signatureProvider });
+
+// show status during startup
+let statusContent = &quot;&quot;;
+function log(msg: string) {
+    statusContent += msg + &quot;\n&quot;;
+    render(&lt;pre style={{ padding: 20 }}&gt;{statusContent}&lt;/pre&gt;, document.body);
+}
+
+// fetch schema using 'graphqlschema' action
+let schema: GraphQLSchema | null = null;
+async function fetchSchema() {
+    const result = (await api.transact(
+        {
+            actions: [
+                {
+                    authorization: [{ actor: user, permission: &quot;active&quot; }],
+                    account: contract,
+                    name: &quot;graphqlschema&quot;,
+                    data: {},
+                },
+            ],
+        },
+        { useLastIrreversible: true, expireSeconds: 2 }
+    )) as any;
+    const sch = result.processed.action_traces[0].console;
+    log(&quot;&quot;);
+    log(sch);
+    schema = buildSchema(sch);
+}
+
+// run query using 'graphql' action
+async function fetcher({ query }: { query: string }) {
+    const result = (await api.transact(
+        {
+            actions: [
+                {
+                    authorization: [{ actor: user, permission: &quot;active&quot; }],
+                    account: contract,
+                    name: &quot;graphql&quot;,
+                    data: { query },
+                },
+            ],
+        },
+        { useLastIrreversible: true, expireSeconds: 2 }
+    )) as any;
+    return JSON.parse(result.processed.action_traces[0].console);
+}
+
+// Populate the UI with this example query
+const defaultQuery = `# GraphiQL is talking to a contract running in nodeos.
+# Press the ▶ button above to run this query.
+
+{
+  contract
+  animal(name: &quot;fido&quot;) {
+    name
+    type
+    owner
+    purchase_price
+  }
+}`;
+
+// Query UI
+export default function Page() {
+    return (
+        &lt;main style={{ height: &quot;100%&quot; }}&gt;
+            &lt;GraphiQL
+                {...{
+                    fetcher,
+                    defaultQuery,
+                    schema: schema!,
+                }}
+            /&gt;
+        &lt;/main&gt;
+    );
+}
+
+// Startup
+(async () =&gt; {
+    log(`Using RPC: ${rpc.endpoint}`);
+    log(&quot;Fetching schema...&quot;);
+    try {
+        await fetchSchema();
+    } catch (e) {
+        console.log(e);
+        log(e.message);
+        log(&quot;See console for additional details&quot;);
+    }
+    render(&lt;Page&gt;&lt;/Page&gt;, document.body);
+})();
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../graphql/starting/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../graphql/starting/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
